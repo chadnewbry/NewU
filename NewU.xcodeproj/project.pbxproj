@@ -12,12 +12,18 @@
 		A10003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10003; };
 		A10004 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10004; };
 		A10005 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
-		A10006 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
 		A10007 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
 		A10008 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
 		A10009 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
 		A10010 /* ProgressView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
 		A10011 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
+		A10012 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
+		A10013 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
+		A10014 /* NutritionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014; };
+		A10015 /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015; };
+		A10016 /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
+		A10017 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
+		A10018 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,12 +32,18 @@
 		B10003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10004 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B10005 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
-		B10006 /* BodyMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
 		B10007 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B10008 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		B10009 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		B10010 /* ProgressView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView_.swift"; sourceTree = "<group>"; };
 		B10011 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		B10012 /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
+		B10013 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
+		B10014 /* NutritionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionEntry.swift; sourceTree = "<group>"; };
+		B10015 /* SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffect.swift; sourceTree = "<group>"; };
+		B10016 /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
+		B10017 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		B10018 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -74,8 +86,13 @@
 		E10003 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B10012 /* Medication.swift */,
 				B10005 /* Injection.swift */,
-				B10006 /* BodyMetric.swift */,
+				B10013 /* WeightEntry.swift */,
+				B10014 /* NutritionEntry.swift */,
+				B10015 /* SideEffect.swift */,
+				B10016 /* DailyNote.swift */,
+				B10017 /* UserProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -142,6 +159,7 @@
 		E10011 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B10018 /* DataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -248,8 +266,14 @@
 			files = (
 				A10001 /* NewUApp.swift in Sources */,
 				A10002 /* ContentView.swift in Sources */,
+				A10012 /* Medication.swift in Sources */,
 				A10005 /* Injection.swift in Sources */,
-				A10006 /* BodyMetric.swift in Sources */,
+				A10013 /* WeightEntry.swift in Sources */,
+				A10014 /* NutritionEntry.swift in Sources */,
+				A10015 /* SideEffect.swift in Sources */,
+				A10016 /* DailyNote.swift in Sources */,
+				A10017 /* UserProfile.swift in Sources */,
+				A10018 /* DataManager.swift in Sources */,
 				A10007 /* HomeView.swift in Sources */,
 				A10008 /* TrackView.swift in Sources */,
 				A10009 /* CalculatorView.swift in Sources */,
