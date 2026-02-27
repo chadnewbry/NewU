@@ -1,7 +1,13 @@
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
     @State private var selectedTab: Tab = .home
+    @State private var showOnboarding = false
+
+    private var profile: UserProfile? { profiles.first }
 
     enum Tab: String, CaseIterable {
         case home, track, sideEffects, calculator, progress, calendar
@@ -46,9 +52,22 @@ struct ContentView: View {
                 .tag(Tab.calendar)
         }
         .tint(Color.accentColor)
+        .onAppear {
+            if let profile, !profile.hasCompletedOnboarding {
+                showOnboarding = true
+            }
+        }
+        .fullScreenCover(isPresented: $showOnboarding) {
+            if let profile {
+                OnboardingContainerView(profile: profile) {
+                    showOnboarding = false
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: UserProfile.self, inMemory: true)
 }
