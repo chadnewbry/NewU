@@ -48,6 +48,9 @@
 		A10042 /* PrepChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042; };
 		A10044 /* InjectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044; };
 		A10045 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045; };
+		A10046 /* PeptidePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046; };
+		A10047 /* SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047; };
+		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +97,9 @@
 		B10042 /* PrepChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepChecklistView.swift; sourceTree = "<group>"; };
 		B10044 /* InjectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionHistoryView.swift; sourceTree = "<group>"; };
 		B10045 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		B10046 /* PeptidePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeptidePreset.swift; sourceTree = "<group>"; };
+		B10047 /* SyringeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyringeView.swift; sourceTree = "<group>"; };
+		B10048 /* MedicationLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +175,7 @@
 				B10015 /* SideEffect.swift */,
 				B10016 /* DailyNote.swift */,
 				B10017 /* UserProfile.swift */,
+				B10046 /* PeptidePreset.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				B10009 /* CalculatorView.swift */,
+				B10047 /* SyringeView.swift */,
+				B10048 /* MedicationLevelView.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -454,6 +463,9 @@
 				A10042 /* PrepChecklistView.swift in Sources */,
 				A10044 /* InjectionHistoryView.swift in Sources */,
 				A10045 /* PaywallView.swift in Sources */,
+				A10046 /* PeptidePreset.swift in Sources */,
+				A10047 /* SyringeView.swift in Sources */,
+				A10048 /* MedicationLevelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

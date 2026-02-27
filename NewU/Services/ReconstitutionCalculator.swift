@@ -31,22 +31,4 @@ struct ReconstitutionCalculator {
     }
 }
 
-// MARK: - Presets
 
-struct PeptidePreset: Identifiable {
-    let id = UUID()
-    let name: String
-    let commonVialSizeMg: Double
-    let suggestedWaterMl: Double
-    let typicalDoseMcg: Double
-
-    static let allPresets: [PeptidePreset] = [
-        PeptidePreset(name: "BPC-157", commonVialSizeMg: 5, suggestedWaterMl: 2, typicalDoseMcg: 250),
-        PeptidePreset(name: "Semaglutide", commonVialSizeMg: 5, suggestedWaterMl: 2.5, typicalDoseMcg: 250),
-        PeptidePreset(name: "Tirzepatide", commonVialSizeMg: 10, suggestedWaterMl: 2, typicalDoseMcg: 2500),
-        PeptidePreset(name: "TB-500", commonVialSizeMg: 5, suggestedWaterMl: 2, typicalDoseMcg: 2500),
-        PeptidePreset(name: "GHK-Cu", commonVialSizeMg: 50, suggestedWaterMl: 5, typicalDoseMcg: 200),
-        PeptidePreset(name: "CJC-1295", commonVialSizeMg: 2, suggestedWaterMl: 2, typicalDoseMcg: 100),
-        PeptidePreset(name: "Ipamorelin", commonVialSizeMg: 5, suggestedWaterMl: 2.5, typicalDoseMcg: 200),
-    ]
-}
