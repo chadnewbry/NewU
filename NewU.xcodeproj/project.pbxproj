@@ -35,6 +35,15 @@
 		A10027 /* SideEffectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027; };
 		A10028 /* SideEffectPatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028; };
 		A10029 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10029; };
+		A10030 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030; };
+		A10031 /* WelcomeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031; };
+		A10032 /* MedicationSelectionStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032; };
+		A10033 /* DosageStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033; };
+		A10034 /* ScheduleStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10034; };
+		A10035 /* BodyStatsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035; };
+		A10036 /* SuccessPlanStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036; };
+		A10037 /* HealthIntegrationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10037; };
+		A10038 /* NotificationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10038; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +77,15 @@
 		B10027 /* SideEffectHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectHistoryView.swift; sourceTree = "<group>"; };
 		B10028 /* SideEffectPatternsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectPatternsView.swift; sourceTree = "<group>"; };
 		B10029 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
+		B10030 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		B10031 /* WelcomeStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeStepView.swift; sourceTree = "<group>"; };
+		B10032 /* MedicationSelectionStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSelectionStepView.swift; sourceTree = "<group>"; };
+		B10033 /* DosageStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStepView.swift; sourceTree = "<group>"; };
+		B10034 /* ScheduleStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStepView.swift; sourceTree = "<group>"; };
+		B10035 /* BodyStatsStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyStatsStepView.swift; sourceTree = "<group>"; };
+		B10036 /* SuccessPlanStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanStepView.swift; sourceTree = "<group>"; };
+		B10037 /* HealthIntegrationStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthIntegrationStepView.swift; sourceTree = "<group>"; };
+		B10038 /* NotificationStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +175,7 @@
 				E10015 /* Calendar */,
 				E10018 /* Settings */,
 				E10019 /* SideEffects */,
+				E10020 /* Onboarding */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +287,22 @@
 				B10028 /* SideEffectPatternsView.swift */,
 			);
 			path = SideEffects;
+			sourceTree = "<group>";
+		};
+		E10020 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B10030 /* OnboardingContainerView.swift */,
+				B10031 /* WelcomeStepView.swift */,
+				B10032 /* MedicationSelectionStepView.swift */,
+				B10033 /* DosageStepView.swift */,
+				B10034 /* ScheduleStepView.swift */,
+				B10035 /* BodyStatsStepView.swift */,
+				B10036 /* SuccessPlanStepView.swift */,
+				B10037 /* HealthIntegrationStepView.swift */,
+				B10038 /* NotificationStepView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,6 +429,15 @@
 				A10027 /* SideEffectHistoryView.swift in Sources */,
 				A10028 /* SideEffectPatternsView.swift in Sources */,
 				A10029 /* DayDetailView.swift in Sources */,
+				A10030 /* OnboardingContainerView.swift in Sources */,
+				A10031 /* WelcomeStepView.swift in Sources */,
+				A10032 /* MedicationSelectionStepView.swift in Sources */,
+				A10033 /* DosageStepView.swift in Sources */,
+				A10034 /* ScheduleStepView.swift in Sources */,
+				A10035 /* BodyStatsStepView.swift in Sources */,
+				A10036 /* SuccessPlanStepView.swift in Sources */,
+				A10037 /* HealthIntegrationStepView.swift in Sources */,
+				A10038 /* NotificationStepView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

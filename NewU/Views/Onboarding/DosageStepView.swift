@@ -89,7 +89,7 @@ struct DosageStepView: View {
             }
             .buttonStyle(.plain)
 
-            FlowLayout(spacing: 10) {
+            DosageFlowLayout(spacing: 10) {
                 ForEach(presetDosages, id: \.self) { dosage in
                     dosageChip(dosage)
                 }
@@ -174,7 +174,7 @@ struct DosageStepView: View {
 
 // MARK: - Flow Layout
 
-struct FlowLayout: Layout {
+struct DosageFlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
