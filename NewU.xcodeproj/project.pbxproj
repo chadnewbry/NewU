@@ -44,6 +44,10 @@
 		A10036 /* SuccessPlanStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036; };
 		A10037 /* HealthIntegrationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10037; };
 		A10038 /* NotificationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10038; };
+		A10041 /* BodyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041; };
+		A10042 /* PrepChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042; };
+		A10044 /* InjectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044; };
+		A10045 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +90,10 @@
 		B10036 /* SuccessPlanStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanStepView.swift; sourceTree = "<group>"; };
 		B10037 /* HealthIntegrationStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthIntegrationStepView.swift; sourceTree = "<group>"; };
 		B10038 /* NotificationStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepView.swift; sourceTree = "<group>"; };
+		B10041 /* BodyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMapView.swift; sourceTree = "<group>"; };
+		B10042 /* PrepChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepChecklistView.swift; sourceTree = "<group>"; };
+		B10044 /* InjectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionHistoryView.swift; sourceTree = "<group>"; };
+		B10045 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				B10008 /* TrackView.swift */,
+				B10041 /* BodyMapView.swift */,
+				B10042 /* PrepChecklistView.swift */,
+				B10044 /* InjectionHistoryView.swift */,
+				B10045 /* PaywallView.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -438,6 +450,10 @@
 				A10036 /* SuccessPlanStepView.swift in Sources */,
 				A10037 /* HealthIntegrationStepView.swift in Sources */,
 				A10038 /* NotificationStepView.swift in Sources */,
+				A10041 /* BodyMapView.swift in Sources */,
+				A10042 /* PrepChecklistView.swift in Sources */,
+				A10044 /* InjectionHistoryView.swift in Sources */,
+				A10045 /* PaywallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
