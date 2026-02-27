@@ -100,7 +100,7 @@ struct ScheduleStepView: View {
 
                 Text(String(day.short.prefix(3)))
                     .font(.caption2)
-                    .foregroundStyle(isSelected ? .white.opacity(0.8) : .tertiary)
+                    .foregroundStyle(isSelected ? .white.opacity(0.8) : .secondary)
             }
             .frame(width: 44, height: 44)
             .background(
