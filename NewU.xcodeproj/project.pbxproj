@@ -24,6 +24,10 @@
 		A10016 /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
 		A10017 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
 		A10018 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
+		A10019 /* MedicationLevelCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019; };
+		A10020 /* ReconstitutionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
+		A10021 /* MedicationLevelCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021; };
+		A10022 /* ReconstitutionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,11 +48,33 @@
 		B10016 /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
 		B10017 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B10018 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B10019 /* MedicationLevelCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelCalculator.swift; sourceTree = "<group>"; };
+		B10020 /* ReconstitutionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstitutionCalculator.swift; sourceTree = "<group>"; };
+		B10021 /* MedicationLevelCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelCalculatorTests.swift; sourceTree = "<group>"; };
+		B10022 /* ReconstitutionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstitutionCalculatorTests.swift; sourceTree = "<group>"; };
 		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXContainerItemProxy section */
+		H10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F10004 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F10001;
+			remoteInfo = NewU;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D10002 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -62,8 +88,18 @@
 			isa = PBXGroup;
 			children = (
 				E10002 /* NewU */,
+				E10016 /* NewUTests */,
 				E10010 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		E10016 /* NewUTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10021 /* MedicationLevelCalculatorTests.swift */,
+				B10022 /* ReconstitutionCalculatorTests.swift */,
+			);
+			path = NewUTests;
 			sourceTree = "<group>";
 		};
 		E10002 /* NewU */ = {
@@ -152,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				C10001 /* NewU.app */,
+				C10002 /* NewUTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				B10018 /* DataManager.swift */,
+				B10019 /* MedicationLevelCalculator.swift */,
+				B10020 /* ReconstitutionCalculator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -214,7 +253,32 @@
 			productReference = C10001 /* NewU.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F10006 /* NewUTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G10007;
+			buildPhases = (
+				F10005 /* Sources */,
+				D10002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				H10002 /* PBXTargetDependency */,
+			);
+			name = NewUTests;
+			productName = NewUTests;
+			productReference = C10002 /* NewUTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXTargetDependency section */
+		H10002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10001 /* NewU */;
+			targetProxy = H10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		F10004 /* Project object */ = {
@@ -226,6 +290,10 @@
 				TargetAttributes = {
 					F10001 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					F10006 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F10001;
 					};
 				};
 			};
@@ -243,6 +311,7 @@
 			projectRoot = "";
 			targets = (
 				F10001 /* NewU */,
+				F10006 /* NewUTests */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +348,17 @@
 				A10009 /* CalculatorView.swift in Sources */,
 				A10010 /* ProgressView_.swift in Sources */,
 				A10011 /* CalendarView.swift in Sources */,
+				A10019 /* MedicationLevelCalculator.swift in Sources */,
+				A10020 /* ReconstitutionCalculator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F10005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10021 /* MedicationLevelCalculatorTests.swift in Sources */,
+				A10022 /* ReconstitutionCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +546,42 @@
 			};
 			name = Release;
 		};
+		G10008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newu.glp-calculator.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewU.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NewU";
+			};
+			name = Debug;
+		};
+		G10009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newu.glp-calculator.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewU.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NewU";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -483,6 +599,15 @@
 			buildConfigurations = (
 				G10005 /* Debug */,
 				G10006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G10007 /* Build configuration list for PBXNativeTarget "NewUTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G10008 /* Debug */,
+				G10009 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
