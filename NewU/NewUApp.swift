@@ -10,6 +10,7 @@ struct NewUApp: App {
             ContentView()
                 .onAppear {
                     dataManager.seedDefaultMedications()
+                    _ = dataManager.getOrCreateUserProfile()
                 }
         }
         .modelContainer(dataManager.modelContainer)
