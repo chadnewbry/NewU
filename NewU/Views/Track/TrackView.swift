@@ -52,10 +52,15 @@ struct InjectionRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(injection.medication.isEmpty ? "Untitled" : injection.medication)
+            Text(injection.medication?.name ?? "Unknown Medication")
                 .font(.headline)
             HStack {
-                Text("\(injection.dosage, specifier: "%.2f") \(injection.unit)")
+                Text("\(injection.dosageMg, specifier: "%.2f") mg")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Text("•")
+                    .foregroundStyle(.tertiary)
+                Text(injection.injectionSite.displayName)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -71,11 +76,12 @@ struct InjectionRow: View {
 struct AddInjectionView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Query private var medications: [Medication]
 
-    @State private var medication = ""
-    @State private var dosage: Double = 0
-    @State private var unit = "mg"
-    @State private var site = ""
+    @State private var selectedMedication: Medication?
+    @State private var dosageMg: Double = 0
+    @State private var injectionSite: InjectionSite = .leftAbdomen
+    @State private var painLevel: Int = 1
     @State private var notes = ""
     @State private var date = Date.now
 
@@ -83,20 +89,26 @@ struct AddInjectionView: View {
         NavigationStack {
             Form {
                 Section("Medication") {
-                    TextField("Name", text: $medication)
-                    HStack {
-                        TextField("Dosage", value: $dosage, format: .number)
-                            .keyboardType(.decimalPad)
-                        Picker("Unit", selection: $unit) {
-                            Text("mg").tag("mg")
-                            Text("mcg").tag("mcg")
-                            Text("units").tag("units")
-                            Text("mL").tag("mL")
+                    Picker("Medication", selection: $selectedMedication) {
+                        Text("Select...").tag(nil as Medication?)
+                        ForEach(medications) { med in
+                            Text(med.name).tag(med as Medication?)
                         }
                     }
+                    TextField("Dosage (mg)", value: $dosageMg, format: .number)
+                        .keyboardType(.decimalPad)
                 }
                 Section("Details") {
-                    TextField("Injection Site", text: $site)
+                    Picker("Injection Site", selection: $injectionSite) {
+                        ForEach(InjectionSite.allCases, id: \.self) { site in
+                            Text(site.displayName).tag(site)
+                        }
+                    }
+                    Picker("Pain Level", selection: $painLevel) {
+                        ForEach(1...5, id: \.self) { level in
+                            Text("\(level)").tag(level)
+                        }
+                    }
                     DatePicker("Date", selection: $date)
                     TextField("Notes", text: $notes, axis: .vertical)
                         .lineLimit(3...6)
@@ -110,7 +122,16 @@ struct AddInjectionView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let injection = Injection(date: date, medication: medication, dosage: dosage, unit: unit, site: site, notes: notes)
+                        let injection = Injection(
+                            date: date,
+                            time: date,
+                            medication: selectedMedication,
+                            dosageMg: dosageMg,
+                            injectionSite: injectionSite,
+                            painLevel: painLevel,
+                            notes: notes.isEmpty ? nil : notes,
+                            prepChecklistCompleted: false
+                        )
                         modelContext.insert(injection)
                         dismiss()
                     }
@@ -122,5 +143,5 @@ struct AddInjectionView: View {
 
 #Preview {
     TrackView()
-        .modelContainer(for: Injection.self, inMemory: true)
+        .modelContainer(for: [Injection.self, Medication.self], inMemory: true)
 }
