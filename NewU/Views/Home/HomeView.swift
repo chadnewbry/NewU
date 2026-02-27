@@ -3,12 +3,12 @@ import SwiftData
 
 struct HomeView: View {
     @Query(sort: \Injection.date, order: .reverse) private var recentInjections: [Injection]
+    @Query(sort: \WeightEntry.date, order: .reverse) private var weightEntries: [WeightEntry]
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Welcome card
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Welcome back")
                             .font(.subheadline)
@@ -20,7 +20,6 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
 
-                    // Quick stats
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
                         GridItem(.flexible())
@@ -28,7 +27,12 @@ struct HomeView: View {
                         StatCard(title: "Next Dose", value: "—", icon: "clock.fill", color: .blue)
                         StatCard(title: "Streak", value: "0 days", icon: "flame.fill", color: .orange)
                         StatCard(title: "This Week", value: "\(weeklyCount)", icon: "syringe.fill", color: .green)
-                        StatCard(title: "Weight", value: "—", icon: "scalemass.fill", color: .purple)
+                        StatCard(
+                            title: "Weight",
+                            value: latestWeightString,
+                            icon: "scalemass.fill",
+                            color: .purple
+                        )
                     }
                     .padding(.horizontal)
 
@@ -42,6 +46,11 @@ struct HomeView: View {
     private var weeklyCount: Int {
         let weekAgo = Calendar.current.date(byAdding: .day, value: -7, to: .now) ?? .now
         return recentInjections.filter { $0.date >= weekAgo }.count
+    }
+
+    private var latestWeightString: String {
+        guard let latest = weightEntries.first else { return "—" }
+        return String(format: "%.1f lbs", latest.weightLbs)
     }
 }
 
@@ -73,5 +82,5 @@ struct StatCard: View {
 
 #Preview {
     HomeView()
-        .modelContainer(for: Injection.self, inMemory: true)
+        .modelContainer(for: [Injection.self, WeightEntry.self], inMemory: true)
 }

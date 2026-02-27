@@ -3,24 +3,15 @@ import SwiftData
 
 @main
 struct NewUApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Injection.self,
-            BodyMetric.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @StateObject private var dataManager = DataManager.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    dataManager.seedDefaultMedications()
+                }
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(dataManager.container)
     }
 }

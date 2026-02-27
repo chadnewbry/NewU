@@ -2,21 +2,20 @@ import SwiftUI
 import SwiftData
 
 struct ProgressView_: View {
-    @Query(sort: \BodyMetric.date, order: .reverse) private var metrics: [BodyMetric]
+    @Query(sort: \WeightEntry.date, order: .reverse) private var weightEntries: [WeightEntry]
     @Query(sort: \Injection.date, order: .reverse) private var injections: [Injection]
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    if metrics.isEmpty && injections.isEmpty {
+                    if weightEntries.isEmpty && injections.isEmpty {
                         ContentUnavailableView(
                             "No Data Yet",
                             systemImage: "chart.line.uptrend.xyaxis",
                             description: Text("Start tracking to see your progress.")
                         )
                     } else {
-                        // Summary cards
                         VStack(spacing: 16) {
                             SummaryCard(
                                 title: "Total Injections",
@@ -26,7 +25,7 @@ struct ProgressView_: View {
                             )
                             SummaryCard(
                                 title: "Weight Entries",
-                                value: "\(metrics.count)",
+                                value: "\(weightEntries.count)",
                                 icon: "scalemass.fill",
                                 color: .purple
                             )
@@ -71,5 +70,5 @@ struct SummaryCard: View {
 
 #Preview {
     ProgressView_()
-        .modelContainer(for: [Injection.self, BodyMetric.self], inMemory: true)
+        .modelContainer(for: [Injection.self, WeightEntry.self], inMemory: true)
 }

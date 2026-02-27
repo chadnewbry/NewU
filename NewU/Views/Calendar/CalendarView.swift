@@ -19,7 +19,6 @@ struct CalendarView: View {
 
                 Divider()
 
-                // Injections for selected date
                 let dayInjections = injectionsForDate(selectedDate)
                 if dayInjections.isEmpty {
                     ContentUnavailableView(
@@ -46,5 +45,5 @@ struct CalendarView: View {
 
 #Preview {
     CalendarView()
-        .modelContainer(for: Injection.self, inMemory: true)
+        .modelContainer(for: [Injection.self, Medication.self], inMemory: true)
 }
