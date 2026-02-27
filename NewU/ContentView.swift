@@ -4,7 +4,7 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .home
 
     enum Tab: String, CaseIterable {
-        case home, track, calculator, progress, calendar
+        case home, track, sideEffects, calculator, progress, calendar
     }
 
     var body: some View {
@@ -20,6 +20,12 @@ struct ContentView: View {
                     Label("Track", systemImage: "syringe.fill")
                 }
                 .tag(Tab.track)
+
+            SideEffectsView()
+                .tabItem {
+                    Label("Side Effects", systemImage: "heart.text.clipboard")
+                }
+                .tag(Tab.sideEffects)
 
             CalculatorView()
                 .tabItem {

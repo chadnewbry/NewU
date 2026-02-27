@@ -30,6 +30,10 @@
 		A10022 /* ReconstitutionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
 		A10023 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023; };
 		A10024 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024; };
+		A10025 /* SideEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025; };
+		A10026 /* LogSideEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026; };
+		A10027 /* SideEffectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027; };
+		A10028 /* SideEffectPatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10023 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B10024 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		B10025 /* SideEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsView.swift; sourceTree = "<group>"; };
+		B10026 /* LogSideEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSideEffectView.swift; sourceTree = "<group>"; };
+		B10027 /* SideEffectHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectHistoryView.swift; sourceTree = "<group>"; };
+		B10028 /* SideEffectPatternsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectPatternsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,12 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				E10002 /* NewU */,
-				E10016 /* NewUTests */,
+				E10017 /* NewUTests */,
 				E10010 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E10016 /* NewUTests */ = {
+		E10017 /* NewUTests */ = {
 			isa = PBXGroup;
 			children = (
 				B10021 /* MedicationLevelCalculatorTests.swift */,
@@ -145,7 +153,8 @@
 				E10014 /* Calculator */,
 				E10007 /* Progress */,
 				E10015 /* Calendar */,
-				E10016 /* Settings */,
+				E10018 /* Settings */,
+				E10019 /* SideEffects */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,12 +248,23 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		E10016 /* Settings */ = {
+		E10018 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				B10024 /* NotificationSettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		E10019 /* SideEffects */ = {
+			isa = PBXGroup;
+			children = (
+				B10025 /* SideEffectsView.swift */,
+				B10026 /* LogSideEffectView.swift */,
+				B10027 /* SideEffectHistoryView.swift */,
+				B10028 /* SideEffectPatternsView.swift */,
+			);
+			path = SideEffects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +386,10 @@
 				A10020 /* ReconstitutionCalculator.swift in Sources */,
 				A10023 /* NotificationManager.swift in Sources */,
 				A10024 /* NotificationSettingsView.swift in Sources */,
+				A10025 /* SideEffectsView.swift in Sources */,
+				A10026 /* LogSideEffectView.swift in Sources */,
+				A10027 /* SideEffectHistoryView.swift in Sources */,
+				A10028 /* SideEffectPatternsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
