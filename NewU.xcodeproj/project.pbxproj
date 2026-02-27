@@ -34,6 +34,7 @@
 		A10026 /* LogSideEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026; };
 		A10027 /* SideEffectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027; };
 		A10028 /* SideEffectPatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028; };
+		A10029 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10029; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		B10026 /* LogSideEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSideEffectView.swift; sourceTree = "<group>"; };
 		B10027 /* SideEffectHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectHistoryView.swift; sourceTree = "<group>"; };
 		B10028 /* SideEffectPatternsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectPatternsView.swift; sourceTree = "<group>"; };
+		B10029 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				B10011 /* CalendarView.swift */,
+				B10029 /* DayDetailView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				A10026 /* LogSideEffectView.swift in Sources */,
 				A10027 /* SideEffectHistoryView.swift in Sources */,
 				A10028 /* SideEffectPatternsView.swift in Sources */,
+				A10029 /* DayDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
