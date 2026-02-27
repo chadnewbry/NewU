@@ -28,6 +28,8 @@
 		A10020 /* ReconstitutionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
 		A10021 /* MedicationLevelCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021; };
 		A10022 /* ReconstitutionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
+		A10023 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023; };
+		A10024 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		B10022 /* ReconstitutionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstitutionCalculatorTests.swift; sourceTree = "<group>"; };
 		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10023 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B10024 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +145,7 @@
 				E10014 /* Calculator */,
 				E10007 /* Progress */,
 				E10015 /* Calendar */,
+				E10016 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				B10018 /* DataManager.swift */,
 				B10019 /* MedicationLevelCalculator.swift */,
 				B10020 /* ReconstitutionCalculator.swift */,
+				B10023 /* NotificationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -231,6 +237,14 @@
 				B10011 /* CalendarView.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		E10016 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B10024 /* NotificationSettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +364,8 @@
 				A10011 /* CalendarView.swift in Sources */,
 				A10019 /* MedicationLevelCalculator.swift in Sources */,
 				A10020 /* ReconstitutionCalculator.swift in Sources */,
+				A10023 /* NotificationManager.swift in Sources */,
+				A10024 /* NotificationSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

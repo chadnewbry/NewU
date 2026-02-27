@@ -16,6 +16,11 @@ final class UserProfile {
     var selectedMedication: Medication?
     var currentDosageMg: Double?
     var injectionDayOfWeek: Int?
+    var reminderHour: Int
+    var reminderMinute: Int
+    var dayBeforeReminderEnabled: Bool
+    var missedInjectionReminderEnabled: Bool
+    var notificationsEnabled: Bool
     var hasCompletedOnboarding: Bool
     var hasPurchasedFullAccess: Bool
     var freeUsesRemaining: Int
@@ -34,6 +39,11 @@ final class UserProfile {
         selectedMedication: Medication? = nil,
         currentDosageMg: Double? = nil,
         injectionDayOfWeek: Int? = nil,
+        reminderHour: Int = 9,
+        reminderMinute: Int = 0,
+        dayBeforeReminderEnabled: Bool = true,
+        missedInjectionReminderEnabled: Bool = true,
+        notificationsEnabled: Bool = false,
         hasCompletedOnboarding: Bool = false,
         hasPurchasedFullAccess: Bool = false,
         freeUsesRemaining: Int = 5
@@ -51,6 +61,11 @@ final class UserProfile {
         self.selectedMedication = selectedMedication
         self.currentDosageMg = currentDosageMg
         self.injectionDayOfWeek = injectionDayOfWeek
+        self.reminderHour = reminderHour
+        self.reminderMinute = reminderMinute
+        self.dayBeforeReminderEnabled = dayBeforeReminderEnabled
+        self.missedInjectionReminderEnabled = missedInjectionReminderEnabled
+        self.notificationsEnabled = notificationsEnabled
         self.hasCompletedOnboarding = hasCompletedOnboarding
         self.hasPurchasedFullAccess = hasPurchasedFullAccess
         self.freeUsesRemaining = freeUsesRemaining
