@@ -5,32 +5,51 @@ struct TrackView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Injection.date, order: .reverse) private var injections: [Injection]
     @State private var showingAddSheet = false
+    @State private var selectedSegment = 0
+
+    private var canLog: Bool {
+        let descriptor = FetchDescriptor<UserProfile>()
+        guard let profile = try? modelContext.fetch(descriptor).first else { return true }
+        return profile.hasPurchasedFullAccess || profile.freeUsesRemaining > 0
+    }
+
+    private var freeUsesRemaining: Int? {
+        let descriptor = FetchDescriptor<UserProfile>()
+        guard let profile = try? modelContext.fetch(descriptor).first,
+              !profile.hasPurchasedFullAccess else { return nil }
+        return profile.freeUsesRemaining
+    }
 
     var body: some View {
         NavigationStack {
-            Group {
-                if injections.isEmpty {
-                    ContentUnavailableView(
-                        "No Injections Logged",
-                        systemImage: "syringe",
-                        description: Text("Tap + to log your first injection.")
-                    )
-                } else {
-                    List {
-                        ForEach(injections) { injection in
-                            InjectionRow(injection: injection)
-                        }
-                        .onDelete(perform: deleteInjections)
+            VStack(spacing: 0) {
+                Picker("View", selection: $selectedSegment) {
+                    Text("Log").tag(0)
+                    Text("History").tag(1)
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+                .padding(.top, 8)
+
+                if selectedSegment == 0 {
+                    if canLog {
+                        logPromptView
+                    } else {
+                        PaywallView()
                     }
+                } else {
+                    InjectionHistoryView()
                 }
             }
             .navigationTitle("Track")
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showingAddSheet = true
-                    } label: {
-                        Image(systemName: "plus")
+                if selectedSegment == 0 && canLog {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            showingAddSheet = true
+                        } label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
             }
@@ -40,22 +59,62 @@ struct TrackView: View {
         }
     }
 
+    @ViewBuilder
+    private var logPromptView: some View {
+        if injections.isEmpty {
+            ContentUnavailableView(
+                "No Injections Logged",
+                systemImage: "syringe",
+                description: Text("Tap + to log your first injection.")
+            )
+        } else {
+            List {
+                Section("Recent") {
+                    ForEach(injections.prefix(5)) { injection in
+                        InjectionRow(injection: injection)
+                    }
+                    .onDelete(perform: deleteInjections)
+                }
+                if let usesLeft = freeUsesRemaining {
+                    Section {
+                        HStack {
+                            Image(systemName: "gift.fill")
+                                .foregroundStyle(.orange)
+                            Text("\(usesLeft) free logs remaining")
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private func deleteInjections(offsets: IndexSet) {
+        let recentFive = Array(injections.prefix(5))
         for index in offsets {
-            modelContext.delete(injections[index])
+            modelContext.delete(recentFive[index])
         }
     }
 }
 
+// MARK: - Injection Row
+
 struct InjectionRow: View {
     let injection: Injection
+    private let painEmojis = ["😊", "🙂", "😐", "😣", "😖"]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(injection.medication?.name ?? "Unknown Medication")
-                .font(.headline)
             HStack {
-                Text("\(injection.dosageMg, specifier: "%.2f") mg")
+                Text(injection.medication?.name ?? "Unknown Medication")
+                    .font(.headline)
+                Spacer()
+                let idx = max(0, min(injection.painLevel - 1, 4))
+                Text(painEmojis[idx])
+            }
+            HStack {
+                Text("\(injection.dosageMg, specifier: "%.2g") mg")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Text("•")
@@ -73,44 +132,103 @@ struct InjectionRow: View {
     }
 }
 
+// MARK: - Add Injection View
+
 struct AddInjectionView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Query private var medications: [Medication]
+    @Query(sort: \Injection.date, order: .reverse) private var injections: [Injection]
 
+    @State private var date = Date.now
     @State private var selectedMedication: Medication?
     @State private var dosageMg: Double = 0
+    @State private var dosageUnits: Int?
     @State private var injectionSite: InjectionSite = .leftAbdomen
     @State private var painLevel: Int = 1
     @State private var notes = ""
-    @State private var date = Date.now
+    @State private var showingChecklist = true
+    @State private var checklistCompleted = false
+
+    private var isCompound: Bool {
+        selectedMedication?.isCompound ?? false
+    }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Medication") {
-                    Picker("Medication", selection: $selectedMedication) {
-                        Text("Select...").tag(nil as Medication?)
-                        ForEach(medications) { med in
-                            Text(med.name).tag(med as Medication?)
-                        }
-                    }
-                    TextField("Dosage (mg)", value: $dosageMg, format: .number)
-                        .keyboardType(.decimalPad)
+                // Date & Time
+                Section("Date & Time") {
+                    DatePicker("When", selection: $date)
                 }
-                Section("Details") {
-                    Picker("Injection Site", selection: $injectionSite) {
-                        ForEach(InjectionSite.allCases, id: \.self) { site in
-                            Text(site.displayName).tag(site)
+
+                // Medication
+                Section("Medication") {
+                    if medications.isEmpty {
+                        Text("No medications configured yet.")
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                    } else {
+                        Picker("Medication", selection: $selectedMedication) {
+                            Text("Select…").tag(nil as Medication?)
+                            ForEach(medications) { med in
+                                Text(med.name).tag(med as Medication?)
+                            }
                         }
                     }
-                    Picker("Pain Level", selection: $painLevel) {
-                        ForEach(1...5, id: \.self) { level in
-                            Text("\(level)").tag(level)
+                }
+
+                // Dosage
+                if let med = selectedMedication {
+                    Section("Dosage") {
+                        if med.isCompound {
+                            HStack {
+                                TextField("Amount (mg)", value: $dosageMg, format: .number)
+                                    .keyboardType(.decimalPad)
+                                Text("mg")
+                                    .foregroundStyle(.secondary)
+                            }
+                            // Show calculated syringe units if we have reconstitution info
+                            if dosageMg > 0 {
+                                HStack {
+                                    Image(systemName: "syringe")
+                                        .foregroundStyle(.blue)
+                                    Text("See Calculator tab for syringe units")
+                                        .font(.callout)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        } else if !med.defaultDosages.isEmpty {
+                            Picker("Dose (mg)", selection: $dosageMg) {
+                                Text("Select…").tag(0.0)
+                                ForEach(med.defaultDosages, id: \.self) { dose in
+                                    Text("\(dose, specifier: "%.2g") mg").tag(dose)
+                                }
+                            }
+                        } else {
+                            HStack {
+                                TextField("Dosage (mg)", value: $dosageMg, format: .number)
+                                    .keyboardType(.decimalPad)
+                                Text("mg")
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
-                    DatePicker("Date", selection: $date)
-                    TextField("Notes", text: $notes, axis: .vertical)
+                }
+
+                // Injection Site (body map)
+                Section("Injection Site") {
+                    BodyMapView(selectedSite: $injectionSite, injections: injections)
+                }
+
+                // Pain Level
+                Section("Pain Level") {
+                    PainLevelPicker(level: $painLevel)
+                }
+
+                // Notes
+                Section("Notes") {
+                    TextField("Optional notes…", text: $notes, axis: .vertical)
                         .lineLimit(3...6)
                 }
             }
@@ -121,27 +239,60 @@ struct AddInjectionView: View {
                     Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        let injection = Injection(
-                            date: date,
-                            time: date,
-                            medication: selectedMedication,
-                            dosageMg: dosageMg,
-                            injectionSite: injectionSite,
-                            painLevel: painLevel,
-                            notes: notes.isEmpty ? nil : notes,
-                            prepChecklistCompleted: false
-                        )
-                        modelContext.insert(injection)
-                        dismiss()
+                    Button("Log Injection") {
+                        saveInjection()
+                    }
+                    .disabled(selectedMedication == nil)
+                    .fontWeight(.semibold)
+                }
+            }
+            .sheet(isPresented: $showingChecklist) {
+                PrepChecklistView(
+                    isCompound: isCompound,
+                    onDismiss: { showingChecklist = false },
+                    onComplete: {
+                        checklistCompleted = true
+                        showingChecklist = false
+                    }
+                )
+                .interactiveDismissDisabled()
+            }
+            .onChange(of: selectedMedication) {
+                if let med = selectedMedication {
+                    if !med.isCompound, let first = med.defaultDosages.first, dosageMg == 0 {
+                        dosageMg = first
                     }
                 }
             }
         }
     }
+
+    private func saveInjection() {
+        let injection = Injection(
+            date: date,
+            time: date,
+            medication: selectedMedication,
+            dosageMg: dosageMg,
+            dosageUnits: dosageUnits,
+            injectionSite: injectionSite,
+            painLevel: painLevel,
+            notes: notes.isEmpty ? nil : notes,
+            prepChecklistCompleted: checklistCompleted
+        )
+        modelContext.insert(injection)
+
+        // Decrement free uses if applicable
+        let profileDescriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(profileDescriptor).first,
+           !profile.hasPurchasedFullAccess {
+            profile.freeUsesRemaining = max(0, profile.freeUsesRemaining - 1)
+        }
+
+        dismiss()
+    }
 }
 
 #Preview {
     TrackView()
-        .modelContainer(for: [Injection.self, Medication.self], inMemory: true)
+        .modelContainer(for: [Injection.self, Medication.self, UserProfile.self], inMemory: true)
 }
