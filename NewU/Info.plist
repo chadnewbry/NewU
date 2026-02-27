@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>NewU uses HealthKit to read your weight, body fat percentage, and other health metrics to track your progress alongside your peptide regimen.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>NewU uses HealthKit to save weight and body composition data you log in the app.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>NewU uses the camera to scan barcodes on peptide vials and supplements.</string>
+</dict>
+</plist>
