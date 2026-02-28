@@ -12,12 +12,16 @@ struct SettingsView: View {
     @AppStorage("accentColorTheme") private var accentColorTheme: String = "blue"
 
     @StateObject private var healthKitManager = HealthKitManager()
+    @ObservedObject private var purchaseManager = PurchaseManager.shared
 
     @State private var showClearDataAlert = false
     @State private var showExportSheet = false
     @State private var exportURL: URL?
     @State private var healthKitStatusMessage = ""
     @State private var isRequestingHealthKit = false
+    @State private var showPaywall = false
+    @State private var isRestoring = false
+    @State private var restoreMessage: String?
 
     // Profile edit state
     @State private var heightFeet: Int = 5
@@ -74,6 +78,9 @@ struct SettingsView: View {
                 }
                 .presentationDetents([.medium])
             }
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
         }
     }
 
@@ -344,43 +351,74 @@ struct SettingsView: View {
 
     private var purchaseSection: some View {
         Section("Full Access") {
-            if let profile {
-                if profile.hasPurchasedFullAccess {
+            if purchaseManager.isPurchased || profile?.hasPurchasedFullAccess == true {
+                HStack {
+                    Label("Full Access Active", systemImage: "checkmark.seal.fill")
+                        .foregroundStyle(.green)
+                    Spacer()
+                }
+            } else {
+                Button {
+                    showPaywall = true
+                } label: {
                     HStack {
-                        Label("Full Access Active", systemImage: "checkmark.seal.fill")
-                            .foregroundStyle(.green)
-                        Spacer()
-                    }
-                } else {
-                    Button {
-                        // TODO: Present RevenueCat paywall
-                    } label: {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Upgrade to Full Access")
-                                    .fontWeight(.semibold)
-                                Text("Unlimited injections, all features")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.tertiary)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Upgrade to Full Access")
+                                .fontWeight(.semibold)
+                            Text("Unlimited injections, all features — $6.99 forever")
                                 .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.tertiary)
+                            .font(.caption)
                     }
-                    .foregroundStyle(.primary)
+                }
+                .foregroundStyle(.primary)
 
+                if let profile {
                     Text("\(profile.freeUsesRemaining) free injection logs remaining")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-
-                Button("Restore Purchase") {
-                    // TODO: Trigger RevenueCat restore
-                }
-                .foregroundStyle(.blue)
             }
+
+            Button {
+                restorePurchase()
+            } label: {
+                HStack(spacing: 8) {
+                    Text("Restore Purchase")
+                    if isRestoring {
+                        ProgressView()
+                            .scaleEffect(0.75)
+                    }
+                }
+            }
+            .foregroundStyle(.blue)
+            .disabled(isRestoring)
+
+            if let restoreMessage {
+                Text(restoreMessage)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private func restorePurchase() {
+        isRestoring = true
+        restoreMessage = nil
+        Task {
+            do {
+                let restored = try await purchaseManager.restorePurchases()
+                restoreMessage = restored
+                    ? "Purchase restored successfully."
+                    : "No previous purchase found."
+            } catch {
+                restoreMessage = error.localizedDescription
+            }
+            isRestoring = false
         }
     }
 

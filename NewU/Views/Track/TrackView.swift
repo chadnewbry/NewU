@@ -5,6 +5,7 @@ struct TrackView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Injection.date, order: .reverse) private var injections: [Injection]
     @State private var showingAddSheet = false
+    @State private var showPaywall = false
     @State private var selectedSegment = 0
 
     private var canLog: Bool {
@@ -35,7 +36,7 @@ struct TrackView: View {
                     if canLog {
                         logPromptView
                     } else {
-                        PaywallView()
+                        lockedView
                     }
                 } else {
                     InjectionHistoryView()
@@ -43,10 +44,14 @@ struct TrackView: View {
             }
             .navigationTitle("Track")
             .toolbar {
-                if selectedSegment == 0 && canLog {
+                if selectedSegment == 0 {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
-                            showingAddSheet = true
+                            if canLog {
+                                showingAddSheet = true
+                            } else {
+                                showPaywall = true
+                            }
                         } label: {
                             Image(systemName: "plus")
                         }
@@ -56,6 +61,63 @@ struct TrackView: View {
             .sheet(isPresented: $showingAddSheet) {
                 AddInjectionView()
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+            }
+        }
+    }
+
+    private var lockedView: some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [.blue.opacity(0.15), .purple.opacity(0.15)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 80, height: 80)
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 32))
+                    .foregroundStyle(.blue)
+            }
+
+            VStack(spacing: 8) {
+                Text("Free Logs Used Up")
+                    .font(.title3)
+                    .fontWeight(.bold)
+
+                Text("Upgrade to NewU Pro to continue logging injections and tracking your progress.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+            }
+
+            Button {
+                showPaywall = true
+            } label: {
+                Text("Unlock for $6.99")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(
+                        LinearGradient(
+                            colors: [.blue, .purple],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        ),
+                        in: RoundedRectangle(cornerRadius: 14)
+                    )
+                    .foregroundStyle(.white)
+            }
+            .padding(.horizontal, 32)
+
+            Spacer()
         }
     }
 

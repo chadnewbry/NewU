@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct NewUApp: App {
     let dataManager = DataManager.shared
+    let purchaseManager = PurchaseManager.shared
 
     @AppStorage("appColorScheme") private var appColorSchemeRaw: String = "system"
 
@@ -22,6 +23,9 @@ struct NewUApp: App {
                 .onAppear {
                     dataManager.seedDefaultMedications()
                     _ = dataManager.getOrCreateUserProfile()
+                    Task {
+                        await purchaseManager.checkPurchaseStatus()
+                    }
                 }
         }
         .modelContainer(dataManager.modelContainer)
