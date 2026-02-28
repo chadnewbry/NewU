@@ -3,72 +3,71 @@ import SwiftData
 
 struct ProgressView_: View {
     @Query(sort: \WeightEntry.date, order: .reverse) private var weightEntries: [WeightEntry]
-    @Query(sort: \Injection.date, order: .reverse) private var injections: [Injection]
+    @Query(sort: \NutritionEntry.date, order: .reverse) private var nutritionEntries: [NutritionEntry]
+
+    @State private var showLogWeight = false
+    @State private var showLogNutrition = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    if weightEntries.isEmpty && injections.isEmpty {
-                        ContentUnavailableView(
-                            "No Data Yet",
-                            systemImage: "chart.line.uptrend.xyaxis",
-                            description: Text("Start tracking to see your progress.")
-                        )
-                    } else {
-                        VStack(spacing: 16) {
-                            SummaryCard(
-                                title: "Total Injections",
-                                value: "\(injections.count)",
-                                icon: "syringe.fill",
-                                color: .blue
-                            )
-                            SummaryCard(
-                                title: "Weight Entries",
-                                value: "\(weightEntries.count)",
-                                icon: "scalemass.fill",
-                                color: .purple
-                            )
+                    // Quick log buttons
+                    HStack(spacing: 12) {
+                        Button {
+                            showLogWeight = true
+                        } label: {
+                            Label("Log Weight", systemImage: "scalemass.fill")
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 13)
+                                .background(Color.blue, in: RoundedRectangle(cornerRadius: 14))
+                                .foregroundStyle(.white)
+                                .fontWeight(.semibold)
                         }
-                        .padding(.horizontal)
+
+                        Button {
+                            showLogNutrition = true
+                        } label: {
+                            Label("Log Food", systemImage: "fork.knife")
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 13)
+                                .background(Color.green, in: RoundedRectangle(cornerRadius: 14))
+                                .foregroundStyle(.white)
+                                .fontWeight(.semibold)
+                        }
                     }
+                    .padding(.horizontal)
+
+                    // Weight chart
+                    WeightChartView()
+                        .padding(.horizontal)
+
+                    // Nutrition dashboard with rings + weekly chart
+                    NutritionDashboardView()
+                        .padding(.horizontal)
+
+                    // Activity (steps + workouts from HealthKit)
+                    ActivityView()
+                        .padding(.horizontal)
                 }
                 .padding(.top)
+                .padding(.bottom, 32)
             }
             .navigationTitle("Progress")
-        }
-    }
-}
-
-struct SummaryCard: View {
-    let title: String
-    let value: String
-    let icon: String
-    let color: Color
-
-    var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .font(.title2)
-                .foregroundStyle(color)
-                .frame(width: 44)
-
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                Text(value)
-                    .font(.title2)
-                    .fontWeight(.bold)
+            .sheet(isPresented: $showLogWeight) {
+                LogWeightView()
             }
-            Spacer()
+            .sheet(isPresented: $showLogNutrition) {
+                LogNutritionView()
+            }
         }
-        .padding()
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 
 #Preview {
     ProgressView_()
-        .modelContainer(for: [Injection.self, WeightEntry.self], inMemory: true)
+        .modelContainer(
+            for: [WeightEntry.self, NutritionEntry.self, UserProfile.self, Injection.self],
+            inMemory: true
+        )
 }

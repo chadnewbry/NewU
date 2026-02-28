@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3090FAAFDD1E5BA033C4F1E2 /* LogNutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10051 /* LogNutritionView.swift */; };
+		40A7DA1B6982BA614308AB37 /* LogWeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10049 /* LogWeightView.swift */; };
+		536E677A3734A0CF7F606CB8 /* NutritionDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10053 /* NutritionDashboardView.swift */; };
+		7FE3CDBC7EC4E64E121DB768 /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10050 /* WeightChartView.swift */; };
 		8785C66BB6A4C0517425FE41 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07D991DF972E3AACDCD2F58 /* HealthKit.framework */; };
 		9BD2ECEF21EDF059D6324959 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */; };
 		9CFF419AA310888C952A5A77 /* WorkoutSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684B959CF51F700DAF49058 /* WorkoutSummary.swift */; };
@@ -54,6 +58,8 @@
 		A10046 /* PeptidePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* PeptidePreset.swift */; };
 		A10047 /* SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* SyringeView.swift */; };
 		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* MedicationLevelView.swift */; };
+		AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10052 /* BarcodeScannerView.swift */; };
+		CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10054 /* ActivityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +120,12 @@
 		B10046 /* PeptidePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeptidePreset.swift; sourceTree = "<group>"; };
 		B10047 /* SyringeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyringeView.swift; sourceTree = "<group>"; };
 		B10048 /* MedicationLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelView.swift; sourceTree = "<group>"; };
+		B10049 /* LogWeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWeightView.swift; sourceTree = "<group>"; };
+		B10050 /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
+		B10051 /* LogNutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNutritionView.swift; sourceTree = "<group>"; };
+		B10052 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		B10053 /* NutritionDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionDashboardView.swift; sourceTree = "<group>"; };
+		B10054 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF290B4992885FCBACB2EB8C /* WeightEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
@@ -239,6 +251,12 @@
 			isa = PBXGroup;
 			children = (
 				B10010 /* ProgressView_.swift */,
+				B10049 /* LogWeightView.swift */,
+				B10050 /* WeightChartView.swift */,
+				B10051 /* LogNutritionView.swift */,
+				B10052 /* BarcodeScannerView.swift */,
+				B10053 /* NutritionDashboardView.swift */,
+				B10054 /* ActivityView.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -490,6 +508,12 @@
 				A10048 /* MedicationLevelView.swift in Sources */,
 				9CFF419AA310888C952A5A77 /* WorkoutSummary.swift in Sources */,
 				9BD2ECEF21EDF059D6324959 /* HealthKitManager.swift in Sources */,
+				40A7DA1B6982BA614308AB37 /* LogWeightView.swift in Sources */,
+				7FE3CDBC7EC4E64E121DB768 /* WeightChartView.swift in Sources */,
+				3090FAAFDD1E5BA033C4F1E2 /* LogNutritionView.swift in Sources */,
+				AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */,
+				536E677A3734A0CF7F606CB8 /* NutritionDashboardView.swift in Sources */,
+				CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
