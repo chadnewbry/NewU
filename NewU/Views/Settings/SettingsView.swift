@@ -73,10 +73,7 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showExportSheet) {
             if let url = exportURL {
-                ShareLink(item: url, subject: Text("NewU Health Summary")) {
-                    Label("Share PDF", systemImage: "square.and.arrow.up")
-                }
-                .presentationDetents([.medium])
+                ActivityViewController(activityItems: [url])
             }
         }
         .sheet(isPresented: $showPaywall) {
@@ -537,58 +534,163 @@ struct SettingsView: View {
     }
 }
 
+// MARK: - Activity View Controller
+
+struct ActivityViewController: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
 // MARK: - PDF Exporter
 
 enum PDFExporter {
     static func generateSummary(profile: UserProfile, modelContext: ModelContext) -> URL {
-        let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 612, height: 792))
+        let pageWidth: CGFloat = 612
+        let pageHeight: CGFloat = 792
+        let margin: CGFloat = 40
+        let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight))
 
         let tempURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("NewU_Summary_\(Date().formatted(date: .numeric, time: .omitted).replacingOccurrences(of: "/", with: "-")).pdf")
 
+        // Fetch data
+        let injections: [Injection] = (try? modelContext.fetch(
+            FetchDescriptor<Injection>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+        )) ?? []
+        let weights: [WeightEntry] = (try? modelContext.fetch(
+            FetchDescriptor<WeightEntry>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+        )) ?? []
+        let sideEffects: [SideEffect] = (try? modelContext.fetch(
+            FetchDescriptor<SideEffect>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+        )) ?? []
+
         do {
             try renderer.writePDF(to: tempURL) { ctx in
-                ctx.beginPage()
-                let attrs: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.systemFont(ofSize: 24, weight: .bold)
-                ]
-                let titleAttrs: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.systemFont(ofSize: 14)
-                ]
+                let titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+                let sectionFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                let bodyFont = UIFont.systemFont(ofSize: 11)
+                let smallFont = UIFont.systemFont(ofSize: 9, weight: .regular)
 
-                "NewU Health Summary".draw(at: CGPoint(x: 40, y: 40), withAttributes: attrs)
+                let titleAttrs: [NSAttributedString.Key: Any] = [.font: titleFont]
+                let sectionAttrs: [NSAttributedString.Key: Any] = [.font: sectionFont]
+                let bodyAttrs: [NSAttributedString.Key: Any] = [.font: bodyFont]
+                let smallAttrs: [NSAttributedString.Key: Any] = [.font: smallFont, .foregroundColor: UIColor.gray]
 
-                let date = Date().formatted(date: .long, time: .omitted)
-                "Generated: \(date)".draw(at: CGPoint(x: 40, y: 76), withAttributes: titleAttrs)
+                var y: CGFloat = 0
+                let lineHeight: CGFloat = 16
+                let sectionSpacing: CGFloat = 24
 
-                var y: CGFloat = 120
-                let lineHeight: CGFloat = 22
+                func newPage() {
+                    ctx.beginPage()
+                    y = margin
+                }
 
-                func drawLine(_ text: String) {
-                    text.draw(at: CGPoint(x: 40, y: y), withAttributes: titleAttrs)
+                func checkPage(needed: CGFloat = 40) {
+                    if y + needed > pageHeight - margin {
+                        newPage()
+                    }
+                }
+
+                func drawLine(_ text: String, attrs: [NSAttributedString.Key: Any] = bodyAttrs, indent: CGFloat = 0) {
+                    checkPage()
+                    text.draw(at: CGPoint(x: margin + indent, y: y), withAttributes: attrs)
                     y += lineHeight
                 }
 
-                drawLine("PROFILE")
+                func drawSection(_ title: String) {
+                    checkPage(needed: 60)
+                    y += sectionSpacing
+                    title.draw(at: CGPoint(x: margin, y: y), withAttributes: sectionAttrs)
+                    y += 24
+                }
+
+                // Page 1
+                newPage()
+
+                "NewU Health Summary".draw(at: CGPoint(x: margin, y: y), withAttributes: titleAttrs)
+                y += 36
+
+                let dateStr = Date().formatted(date: .long, time: .omitted)
+                "Generated: \(dateStr)".draw(at: CGPoint(x: margin, y: y), withAttributes: smallAttrs)
+                y += 24
+
+                // Profile Section
+                drawSection("Profile")
                 if let med = profile.selectedMedication {
-                    drawLine("  Medication: \(med.name)")
+                    drawLine("Medication: \(med.name)", indent: 8)
                 }
                 if let dose = profile.currentDosageMg {
-                    drawLine("  Current Dose: \(String(format: "%.2g", dose)) mg")
+                    drawLine("Current Dose: \(String(format: "%.2g", dose)) mg", indent: 8)
                 }
                 let feet = Int(profile.heightInches) / 12
                 let inches = Int(profile.heightInches) % 12
-                drawLine("  Height: \(feet)'\(inches)\"")
-                drawLine("  Start Weight: \(String(format: "%.1f", profile.startWeightLbs)) lbs")
-                drawLine("  Goal Weight: \(String(format: "%.1f", profile.goalWeightLbs)) lbs")
+                drawLine("Height: \(feet)'\(inches)\"", indent: 8)
+                drawLine("Start Weight: \(String(format: "%.1f", profile.startWeightLbs)) lbs", indent: 8)
+                drawLine("Goal Weight: \(String(format: "%.1f", profile.goalWeightLbs)) lbs", indent: 8)
 
-                y += lineHeight
-                drawLine("DAILY GOALS")
-                drawLine("  Protein: \(Int(profile.dailyProteinGoalGrams))g")
-                drawLine("  Fiber: \(Int(profile.dailyFiberGoalGrams))g")
-                drawLine("  Calories: \(profile.dailyCalorieGoal) kcal")
-                drawLine("  Water: \(Int(profile.dailyWaterGoalOz)) oz")
-                drawLine("  Steps: \(profile.dailyStepGoal)")
+                if let latestWeight = weights.first {
+                    let change = latestWeight.weightLbs - profile.startWeightLbs
+                    let sign = change >= 0 ? "+" : ""
+                    drawLine("Current Weight: \(String(format: "%.1f", latestWeight.weightLbs)) lbs (\(sign)\(String(format: "%.1f", change)) lbs)", indent: 8)
+                }
+
+                // Daily Goals
+                drawSection("Daily Goals")
+                drawLine("Protein: \(Int(profile.dailyProteinGoalGrams))g", indent: 8)
+                drawLine("Fiber: \(Int(profile.dailyFiberGoalGrams))g", indent: 8)
+                drawLine("Calories: \(profile.dailyCalorieGoal) kcal", indent: 8)
+                drawLine("Water: \(Int(profile.dailyWaterGoalOz)) oz", indent: 8)
+                drawLine("Steps: \(profile.dailyStepGoal)", indent: 8)
+
+                // Injection History
+                if !injections.isEmpty {
+                    drawSection("Injection History (\(injections.count) total)")
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = .medium
+                    for injection in injections.prefix(50) {
+                        let date = dateFormatter.string(from: injection.date)
+                        let medName = injection.medication?.name ?? "Unknown"
+                        let dose = String(format: "%.2g", injection.dosageMg)
+                        let site = injection.injectionSite.displayName
+                        drawLine("\(date) — \(medName) \(dose) mg @ \(site)", indent: 8)
+                    }
+                    if injections.count > 50 {
+                        drawLine("... and \(injections.count - 50) more entries", attrs: smallAttrs, indent: 8)
+                    }
+                }
+
+                // Weight History
+                if !weights.isEmpty {
+                    drawSection("Weight History (\(weights.count) entries)")
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = .medium
+                    for entry in weights.prefix(50) {
+                        let date = dateFormatter.string(from: entry.date)
+                        drawLine("\(date) — \(String(format: "%.1f", entry.weightLbs)) lbs", indent: 8)
+                    }
+                    if weights.count > 50 {
+                        drawLine("... and \(weights.count - 50) more entries", attrs: smallAttrs, indent: 8)
+                    }
+                }
+
+                // Side Effects Summary
+                if !sideEffects.isEmpty {
+                    drawSection("Side Effects (\(sideEffects.count) reported)")
+                    let grouped = Dictionary(grouping: sideEffects, by: { $0.type.displayName })
+                    let sorted = grouped.sorted { $0.value.count > $1.value.count }
+                    for (name, entries) in sorted.prefix(15) {
+                        drawLine("\(name): \(entries.count) occurrence\(entries.count == 1 ? "" : "s")", indent: 8)
+                    }
+                }
+
+                // Footer on last page
+                y = pageHeight - margin - 12
+                "Generated by NewU".draw(at: CGPoint(x: margin, y: y), withAttributes: smallAttrs)
             }
         } catch {
             print("PDF generation error: \(error)")
