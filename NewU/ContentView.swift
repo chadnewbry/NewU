@@ -10,7 +10,7 @@ struct ContentView: View {
     private var profile: UserProfile? { profiles.first }
 
     enum Tab: String, CaseIterable {
-        case home, track, sideEffects, calculator, progress, calendar
+        case home, track, sideEffects, progress, calendar
     }
 
     var body: some View {
@@ -32,12 +32,6 @@ struct ContentView: View {
                     Label("Side Effects", systemImage: "heart.text.clipboard")
                 }
                 .tag(Tab.sideEffects)
-
-            CalculatorView()
-                .tabItem {
-                    Label("Calculator", systemImage: "function")
-                }
-                .tag(Tab.calculator)
 
             ProgressView_()
                 .tabItem {

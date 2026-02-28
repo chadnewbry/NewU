@@ -8,11 +8,16 @@ struct CalculatorView: View {
         case levels = "Levels"
     }
 
-    @State private var selectedPreset: PeptidePreset?
-    @State private var peptideAmountText: String = "5"
-    @State private var waterVolumeText: String = "2"
-    @State private var desiredDoseText: String = "250"
-    @State private var doseUnitIsMcg: Bool = true
+    @AppStorage("calc.selectedPresetName") private var selectedPresetName: String = ""
+    @AppStorage("calc.peptideAmountText") private var peptideAmountText: String = ""
+    @AppStorage("calc.waterVolumeText") private var waterVolumeText: String = ""
+    @AppStorage("calc.desiredDoseText") private var desiredDoseText: String = ""
+    @AppStorage("calc.doseUnitIsMcg") private var doseUnitIsMcg: Bool = true
+    @FocusState private var isDesiredDoseFocused: Bool
+
+    private var selectedPreset: PeptidePreset? {
+        PeptidePreset.allPresets.first { $0.name == selectedPresetName }
+    }
 
     private let calculator = ReconstitutionCalculator()
 
@@ -56,47 +61,123 @@ struct CalculatorView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                Picker("Section", selection: $selectedSegment) {
-                    ForEach(CalculatorSegment.allCases, id: \.self) { seg in
-                        Text(seg.rawValue).tag(seg)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .padding(.top, 8)
-
-                switch selectedSegment {
-                case .reconstitution:
-                    reconstitutionView
-                case .levels:
-                    MedicationLevelView(preset: selectedPreset)
+        VStack(spacing: 0) {
+            Picker("Section", selection: $selectedSegment) {
+                ForEach(CalculatorSegment.allCases, id: \.self) { seg in
+                    Text(seg.rawValue).tag(seg)
                 }
             }
-            .navigationTitle("Calculator")
-            .navigationBarTitleDisplayMode(.large)
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+            .padding(.top, 8)
+            .padding(.bottom, 12)
+
+            switch selectedSegment {
+            case .reconstitution:
+                reconstitutionView
+            case .levels:
+                MedicationLevelView(preset: selectedPreset)
+            }
         }
     }
 
     // MARK: - Reconstitution View
 
-    private var reconstitutionView: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                presetSection
-                peptideAmountSection
-                waterVolumeSection
-                desiredDoseSection
-                resultsCard
+    private var hasCalculation: Bool {
+        !peptideAmountText.isEmpty && !waterVolumeText.isEmpty && !desiredDoseText.isEmpty && volumeToDrawMl > 0
+    }
 
-                SyringeView(fillFraction: min(volumeToDrawMl, 1.0), units: syringeUnits)
-                    .frame(height: 200)
-                    .padding(.horizontal)
+    private var reconstitutionView: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 20) {
+                    if hasCalculation {
+                        myDoseCard
+                    }
+
+                    inputsSection
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .scrollDismissesKeyboard(.interactively)
+            .onChange(of: isDesiredDoseFocused) {
+                if isDesiredDoseFocused {
+                    withAnimation {
+                        proxy.scrollTo("desiredDose", anchor: .bottom)
+                    }
+                }
+            }
         }
-        .scrollDismissesKeyboard(.interactively)
+    }
+
+    private var myDoseCard: some View {
+        VStack(spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("My Dose")
+                        .font(.headline)
+                    if let preset = selectedPreset {
+                        Text(preset.name)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                SyringeView(fillFraction: min(volumeToDrawMl / 1.0, 1.0), units: syringeUnits)
+                    .frame(width: 120, height: 60)
+            }
+
+            Divider()
+
+            HStack(spacing: 0) {
+                doseStatColumn(label: "Draw", value: formatResult(volumeToDrawMl, decimals: 3), unit: "mL", color: .green, large: true)
+                Divider().frame(height: 44)
+                doseStatColumn(label: "Units", value: formatResult(syringeUnits, decimals: 1), unit: "IU", color: .blue, large: true)
+                Divider().frame(height: 44)
+                doseStatColumn(label: "Doses / vial", value: "\(dosesPerVial)", unit: nil, color: .orange, large: false)
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
+    }
+
+    private func doseStatColumn(label: String, value: String, unit: String?, color: Color, large: Bool) -> some View {
+        VStack(spacing: 2) {
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                Text(value)
+                    .font(large ? .title2.bold() : .title3.bold())
+                    .foregroundStyle(color)
+                if let unit {
+                    Text(unit)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var inputsSection: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Text(hasCalculation ? "Recalculate" : "Set Up My Dose")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.secondary)
+                Spacer()
+            }
+            .padding(.horizontal)
+
+            presetSection
+            peptideAmountSection
+            waterVolumeSection
+            desiredDoseSection
+        }
     }
 
     // MARK: - Preset Section
@@ -162,7 +243,7 @@ struct CalculatorView: View {
             VStack(spacing: 8) {
                 presetButtons(values: [5, 10, 15, 20, 30], selected: peptideAmountMg, suffix: "mg") { val in
                     peptideAmountText = formatNumber(val)
-                    selectedPreset = nil
+                    selectedPresetName = ""
                 }
                 customTextField(text: $peptideAmountText, placeholder: "Custom mg")
             }
@@ -174,7 +255,7 @@ struct CalculatorView: View {
             VStack(spacing: 8) {
                 presetButtons(values: [1, 2, 3, 5], selected: waterVolumeMl, suffix: "mL") { val in
                     waterVolumeText = formatNumber(val)
-                    selectedPreset = nil
+                    selectedPresetName = ""
                 }
                 customTextField(text: $waterVolumeText, placeholder: "Custom mL")
             }
@@ -191,9 +272,14 @@ struct CalculatorView: View {
                 if let preset = selectedPreset {
                     dosePresetsForPeptide(preset)
                 }
-                customTextField(text: $desiredDoseText, placeholder: "Custom \(doseUnitIsMcg ? "mcg" : "mg")")
+                TextField("Custom \(doseUnitIsMcg ? "mcg" : "mg")", text: $desiredDoseText)
+                    .keyboardType(.decimalPad)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
+                    .focused($isDesiredDoseFocused)
             }
         }
+        .id("desiredDose")
     }
 
     private var doseUnitToggle: some View {
@@ -262,58 +348,6 @@ struct CalculatorView: View {
         }
     }
 
-    // MARK: - Results Card
-
-    private var resultsCard: some View {
-        VStack(spacing: 16) {
-            Text("Results")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            VStack(spacing: 14) {
-                resultRow(icon: "eyedropper.halffull", iconColor: .blue, label: "Concentration",
-                          value: "\(formatResult(concentrationMgPerMl)) mg/mL")
-
-                Divider()
-
-                resultRow(icon: "syringe.fill", iconColor: .green, label: "Volume to Draw",
-                          value: "\(formatResult(volumeToDrawMl, decimals: 3)) mL", isHighlighted: true)
-
-                Divider()
-
-                resultRow(icon: "gauge.with.needle.fill", iconColor: .orange, label: "Syringe Units",
-                          value: "\(formatResult(syringeUnits, decimals: 1)) units")
-
-                Divider()
-
-                resultRow(icon: "rectangle.stack.fill", iconColor: .purple, label: "Doses per Vial",
-                          value: "\(dosesPerVial)")
-            }
-            .padding()
-            .background(Color(.systemGray6))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-        }
-        .padding(.horizontal)
-    }
-
-    private func resultRow(icon: String, iconColor: Color, label: String, value: String, isHighlighted: Bool = false) -> some View {
-        HStack {
-            Image(systemName: icon)
-                .foregroundStyle(iconColor)
-                .frame(width: 24)
-            Text(label)
-                .foregroundStyle(.secondary)
-            Spacer()
-            Text(value)
-                .font(isHighlighted ? .title3 : .body)
-                .fontWeight(.bold)
-                .foregroundStyle(isHighlighted ? .green : .primary)
-                .contentTransition(.numericText())
-        }
-    }
-
     // MARK: - Reusable Components
 
     private func inputSection<Content: View>(title: String, unit: String, @ViewBuilder content: () -> Content) -> some View {
@@ -377,7 +411,7 @@ struct CalculatorView: View {
     // MARK: - Helpers
 
     private func selectPreset(_ preset: PeptidePreset) {
-        selectedPreset = preset
+        selectedPresetName = preset.name
         peptideAmountText = formatNumber(preset.commonVialSizeMg)
         waterVolumeText = formatNumber(preset.suggestedWaterMl)
         doseUnitIsMcg = true

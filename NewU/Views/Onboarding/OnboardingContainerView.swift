@@ -141,6 +141,7 @@ struct OnboardingContainerView: View {
     // MARK: - Actions
 
     private func nextStep() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         withAnimation(.easeInOut(duration: 0.3)) {
             currentStep = min(totalSteps - 1, currentStep + 1)
         }

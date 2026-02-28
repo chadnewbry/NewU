@@ -104,26 +104,22 @@ struct BarcodeCameraView: UIViewRepresentable {
         let session = AVCaptureSession()
         context.coordinator.session = session
 
-        guard let device = AVCaptureDevice.default(for: .video),
-              let input = try? AVCaptureDeviceInput(device: device) else {
-            return view
-        }
-
-        session.addInput(input)
-
-        let output = AVCaptureMetadataOutput()
-        session.addOutput(output)
-        output.setMetadataObjectsDelegate(context.coordinator, queue: .main)
-        output.metadataObjectTypes = [.ean8, .ean13, .upce, .code128, .code39, .qr, .pdf417]
-
         let preview = AVCaptureVideoPreviewLayer(session: session)
         preview.videoGravity = .resizeAspectFill
-        preview.frame = UIScreen.main.bounds
         view.layer.addSublayer(preview)
         context.coordinator.previewLayer = preview
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            session.startRunning()
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            context.coordinator.startSession()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    context.coordinator.startSession()
+                }
+            }
+        default:
+            break
         }
 
         return view
@@ -145,6 +141,24 @@ struct BarcodeCameraView: UIViewRepresentable {
 
         init(onScan: @escaping (String) -> Void) {
             self.onScan = onScan
+        }
+
+        func startSession() {
+            guard let session else { return }
+
+            guard let device = AVCaptureDevice.default(for: .video),
+                  let input = try? AVCaptureDeviceInput(device: device) else { return }
+
+            session.addInput(input)
+
+            let output = AVCaptureMetadataOutput()
+            session.addOutput(output)
+            output.setMetadataObjectsDelegate(self, queue: .main)
+            output.metadataObjectTypes = [.ean8, .ean13, .upce, .code128, .code39, .qr, .pdf417]
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                session.startRunning()
+            }
         }
 
         func metadataOutput(

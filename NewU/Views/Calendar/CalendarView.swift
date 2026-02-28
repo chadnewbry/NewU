@@ -9,8 +9,12 @@ struct CalendarView: View {
     @Query(sort: \DailyNote.date) private var dailyNotes: [DailyNote]
 
     @State private var displayedMonth: Date = .now
-    @State private var selectedDate: Date? = nil
-    @State private var showingDayDetail = false
+    @State private var selectedDay: SelectedDay? = nil
+
+    struct SelectedDay: Identifiable {
+        let id = UUID()
+        let date: Date
+    }
 
     private let calendar = Calendar.current
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -24,17 +28,15 @@ struct CalendarView: View {
                 Spacer()
             }
             .navigationTitle("Calendar")
-            .sheet(isPresented: $showingDayDetail) {
-                if let date = selectedDate {
-                    DayDetailView(
-                        date: date,
-                        injections: itemsForDate(injections, keyPath: \.date, date: date),
-                        weightEntries: itemsForDate(weightEntries, keyPath: \.date, date: date),
-                        nutritionEntries: itemsForDate(nutritionEntries, keyPath: \.date, date: date),
-                        sideEffects: itemsForDate(sideEffects, keyPath: \.date, date: date),
-                        dailyNote: dailyNotes.first { calendar.isDate($0.date, inSameDayAs: date) }
-                    )
-                }
+            .sheet(item: $selectedDay) { selected in
+                DayDetailView(
+                    date: selected.date,
+                    injections: itemsForDate(injections, keyPath: \.date, date: selected.date),
+                    weightEntries: itemsForDate(weightEntries, keyPath: \.date, date: selected.date),
+                    nutritionEntries: itemsForDate(nutritionEntries, keyPath: \.date, date: selected.date),
+                    sideEffects: itemsForDate(sideEffects, keyPath: \.date, date: selected.date),
+                    dailyNote: dailyNotes.first { calendar.isDate($0.date, inSameDayAs: selected.date) }
+                )
             }
             .gesture(
                 DragGesture(minimumDistance: 50)
@@ -104,8 +106,7 @@ struct CalendarView: View {
                         indicators: indicatorsForDate(date)
                     )
                     .onTapGesture {
-                        selectedDate = date
-                        showingDayDetail = true
+                        selectedDay = SelectedDay(date: date)
                     }
                 } else {
                     Color.clear

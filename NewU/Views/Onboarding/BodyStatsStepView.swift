@@ -9,6 +9,9 @@ struct BodyStatsStepView: View {
 
     @State private var useMetric = false
 
+    enum Field { case startWeight, goalWeight }
+    @FocusState private var focusedField: Field?
+
     private var heightCm: Int {
         Int(round(Double(heightFeet * 12 + heightInches) * 2.54))
     }
@@ -92,6 +95,7 @@ struct BodyStatsStepView: View {
                             .padding()
                             .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
                             .frame(width: 140)
+                            .focused($focusedField, equals: .startWeight)
 
                         Text(useMetric ? "kg" : "lbs")
                             .font(.title3)
@@ -113,6 +117,7 @@ struct BodyStatsStepView: View {
                             .padding()
                             .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
                             .frame(width: 140)
+                            .focused($focusedField, equals: .goalWeight)
 
                         Text(useMetric ? "kg" : "lbs")
                             .font(.title3)
@@ -129,7 +134,7 @@ struct BodyStatsStepView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            Button(action: onContinue) {
+            Button(action: handleContinue) {
                 Text("Continue")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
@@ -142,6 +147,14 @@ struct BodyStatsStepView: View {
             .padding(.bottom, 32)
             .padding(.top, 12)
             .background(.ultraThinMaterial)
+        }
+    }
+
+    private func handleContinue() {
+        if focusedField == .startWeight {
+            focusedField = .goalWeight
+        } else {
+            onContinue()
         }
     }
 }

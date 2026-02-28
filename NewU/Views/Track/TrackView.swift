@@ -8,6 +8,8 @@ struct TrackView: View {
     @State private var showPaywall = false
     @State private var selectedSegment = 0
 
+    private enum Segment: Int { case log = 0, history = 1, calculator = 2 }
+
     private var canLog: Bool {
         let descriptor = FetchDescriptor<UserProfile>()
         guard let profile = try? modelContext.fetch(descriptor).first else { return true }
@@ -27,24 +29,27 @@ struct TrackView: View {
                 Picker("View", selection: $selectedSegment) {
                     Text("Log").tag(0)
                     Text("History").tag(1)
+                    Text("Calculator").tag(2)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
                 .padding(.top, 8)
+                .padding(.bottom, 12)
 
-                if selectedSegment == 0 {
-                    if canLog {
-                        logPromptView
-                    } else {
-                        lockedView
-                    }
-                } else {
+                switch Segment(rawValue: selectedSegment) {
+                case .log:
+                    if canLog { logPromptView } else { lockedView }
+                case .history:
                     InjectionHistoryView()
+                case .calculator:
+                    CalculatorView()
+                case .none:
+                    EmptyView()
                 }
             }
             .navigationTitle("Track")
             .toolbar {
-                if selectedSegment == 0 {
+                if selectedSegment == Segment.log.rawValue {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
                             if canLog {
