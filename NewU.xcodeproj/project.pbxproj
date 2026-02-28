@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2413354D2F5383F400FAFE44 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2413354C2F5383F400FAFE44 /* PurchaseManager.swift */; };
 		3090FAAFDD1E5BA033C4F1E2 /* LogNutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10051 /* LogNutritionView.swift */; };
 		40A7DA1B6982BA614308AB37 /* LogWeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10049 /* LogWeightView.swift */; };
 		536E677A3734A0CF7F606CB8 /* NutritionDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10053 /* NutritionDashboardView.swift */; };
@@ -58,8 +59,6 @@
 		A10046 /* PeptidePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* PeptidePreset.swift */; };
 		A10047 /* SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* SyringeView.swift */; };
 		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* MedicationLevelView.swift */; };
-		AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10052 /* BarcodeScannerView.swift */; };
-		CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10054 /* ActivityView.swift */; };
 		A20001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* SettingsView.swift */; };
 		A20002 /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* WidgetDataManager.swift */; };
 		A20003 /* NewUWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20003 /* NewUWidgetBundle.swift */; };
@@ -67,6 +66,8 @@
 		A20005 /* SmallInjectionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20005 /* SmallInjectionWidget.swift */; };
 		A20006 /* MediumDashboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20006 /* MediumDashboardWidget.swift */; };
 		A20007 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = WF00001 /* WidgetKit.framework */; };
+		AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10052 /* BarcodeScannerView.swift */; };
+		CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10054 /* ActivityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2413354C2F5383F400FAFE44 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		4684B959CF51F700DAF49058 /* WorkoutSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WorkoutSummary.swift; sourceTree = "<group>"; };
 		AFFCBA8DE67F525454454A20 /* NewU.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = NewU.entitlements; sourceTree = "<group>"; };
 		B07D991DF972E3AACDCD2F58 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -133,17 +135,17 @@
 		B10052 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		B10053 /* NutritionDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionDashboardView.swift; sourceTree = "<group>"; };
 		B10054 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF290B4992885FCBACB2EB8C /* WeightEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
-		E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B20001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B20002 /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
 		B20003 /* NewUWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUWidgetBundle.swift; sourceTree = "<group>"; };
 		B20004 /* SharedWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedWidgetData.swift; sourceTree = "<group>"; };
 		B20005 /* SmallInjectionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallInjectionWidget.swift; sourceTree = "<group>"; };
 		B20006 /* MediumDashboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumDashboardWidget.swift; sourceTree = "<group>"; };
+		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20001 /* NewUWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NewUWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF290B4992885FCBACB2EB8C /* WeightEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
+		E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		WF00001 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D20001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20007 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +316,7 @@
 		E10011 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2413354C2F5383F400FAFE44 /* PurchaseManager.swift */,
 				B10018 /* DataManager.swift */,
 				B10019 /* MedicationLevelCalculator.swift */,
 				B10020 /* ReconstitutionCalculator.swift */,
@@ -406,17 +417,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXFrameworksBuildPhase section (widget) */
-		D20001 /* Frameworks (Widget) */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A20007 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section (widget) */
 
 /* Begin PBXNativeTarget section */
 		F10001 /* NewU */ = {
@@ -532,6 +532,7 @@
 				A10013 /* WeightEntry.swift in Sources */,
 				A10014 /* NutritionEntry.swift in Sources */,
 				A10015 /* SideEffect.swift in Sources */,
+				2413354D2F5383F400FAFE44 /* PurchaseManager.swift in Sources */,
 				A10016 /* DailyNote.swift in Sources */,
 				A10017 /* UserProfile.swift in Sources */,
 				A10018 /* DataManager.swift in Sources */,
@@ -587,7 +588,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F20002 /* Sources (Widget) */ = {
+		F20002 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -737,6 +738,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NewU/Preview Content\"";
+				DEVELOPMENT_TEAM = 62R87RHN6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewU/Info.plist;
@@ -769,6 +771,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NewU/Preview Content\"";
+				DEVELOPMENT_TEAM = 62R87RHN6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewU/Info.plist;
@@ -828,7 +831,7 @@
 			};
 			name = Release;
 		};
-		G20001 /* Debug (Widget) */ = {
+		G20001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -847,7 +850,7 @@
 			};
 			name = Debug;
 		};
-		G20002 /* Release (Widget) */ = {
+		G20002 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
