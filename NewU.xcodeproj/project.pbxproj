@@ -60,6 +60,13 @@
 		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* MedicationLevelView.swift */; };
 		AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10052 /* BarcodeScannerView.swift */; };
 		CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10054 /* ActivityView.swift */; };
+		A20001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* SettingsView.swift */; };
+		A20002 /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* WidgetDataManager.swift */; };
+		A20003 /* NewUWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20003 /* NewUWidgetBundle.swift */; };
+		A20004 /* SharedWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20004 /* SharedWidgetData.swift */; };
+		A20005 /* SmallInjectionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20005 /* SmallInjectionWidget.swift */; };
+		A20006 /* MediumDashboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20006 /* MediumDashboardWidget.swift */; };
+		A20007 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = WF00001 /* WidgetKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +137,14 @@
 		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF290B4992885FCBACB2EB8C /* WeightEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
 		E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		B20001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B20002 /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
+		B20003 /* NewUWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUWidgetBundle.swift; sourceTree = "<group>"; };
+		B20004 /* SharedWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedWidgetData.swift; sourceTree = "<group>"; };
+		B20005 /* SmallInjectionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallInjectionWidget.swift; sourceTree = "<group>"; };
+		B20006 /* MediumDashboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumDashboardWidget.swift; sourceTree = "<group>"; };
+		C20001 /* NewUWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NewUWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		WF00001 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				B07D991DF972E3AACDCD2F58 /* HealthKit.framework */,
+				WF00001 /* WidgetKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -172,6 +188,7 @@
 			children = (
 				E10002 /* NewU */,
 				E10017 /* NewUTests */,
+				E20001 /* NewUWidget */,
 				E10010 /* Products */,
 				685D7437CB1509F7362E445B /* Frameworks */,
 			);
@@ -281,6 +298,7 @@
 			children = (
 				C10001 /* NewU.app */,
 				C10002 /* NewUTests.xctest */,
+				C20001 /* NewUWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,6 +311,7 @@
 				B10020 /* ReconstitutionCalculator.swift */,
 				B10023 /* NotificationManager.swift */,
 				E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */,
+				B20002 /* WidgetDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -343,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				B10024 /* NotificationSettingsView.swift */,
+				B20001 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -374,7 +394,29 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		E20001 /* NewUWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B20003 /* NewUWidgetBundle.swift */,
+				B20004 /* SharedWidgetData.swift */,
+				B20005 /* SmallInjectionWidget.swift */,
+				B20006 /* MediumDashboardWidget.swift */,
+			);
+			path = NewUWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXFrameworksBuildPhase section (widget) */
+		D20001 /* Frameworks (Widget) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20007 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section (widget) */
 
 /* Begin PBXNativeTarget section */
 		F10001 /* NewU */ = {
@@ -411,6 +453,22 @@
 			productReference = C10002 /* NewUTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F20001 /* NewUWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G20003 /* Build configuration list for PBXNativeTarget "NewUWidget" */;
+			buildPhases = (
+				F20002 /* Sources */,
+				D20001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NewUWidget;
+			productName = NewUWidget;
+			productReference = C20001 /* NewUWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -445,6 +503,7 @@
 			targets = (
 				F10001 /* NewU */,
 				F10006 /* NewUTests */,
+				F20001 /* NewUWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -514,6 +573,8 @@
 				AC87E5F2D0807CF35AF435B2 /* BarcodeScannerView.swift in Sources */,
 				536E677A3734A0CF7F606CB8 /* NutritionDashboardView.swift in Sources */,
 				CAB4DFABC7988DFD95EDF28C /* ActivityView.swift in Sources */,
+				A20001 /* SettingsView.swift in Sources */,
+				A20002 /* WidgetDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +584,17 @@
 			files = (
 				A10021 /* MedicationLevelCalculatorTests.swift in Sources */,
 				A10022 /* ReconstitutionCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20002 /* Sources (Widget) */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20003 /* NewUWidgetBundle.swift in Sources */,
+				A20004 /* SharedWidgetData.swift in Sources */,
+				A20005 /* SmallInjectionWidget.swift in Sources */,
+				A20006 /* MediumDashboardWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +828,44 @@
 			};
 			name = Release;
 		};
+		G20001 /* Debug (Widget) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NewUWidget;
+				INFOPLIST_KEY_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newu.glp-calculator.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		G20002 /* Release (Widget) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NewUWidget;
+				INFOPLIST_KEY_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newu.glp-calculator.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -782,6 +892,15 @@
 			buildConfigurations = (
 				G10008 /* Debug */,
 				G10009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G20003 /* Build configuration list for PBXNativeTarget "NewUWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G20001 /* Debug */,
+				G20002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

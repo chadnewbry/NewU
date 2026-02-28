@@ -13,6 +13,7 @@ struct HomeView: View {
     @State private var showLogNutrition = false
     @State private var showLogSideEffect = false
     @State private var showQuickActions = false
+    @State private var showSettings = false
 
     private var profile: UserProfile? { profiles.first }
     private let calculator = MedicationLevelCalculator()
@@ -32,6 +33,26 @@ struct HomeView: View {
                 .padding(.bottom, 80)
             }
             .navigationTitle("NewU")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                NavigationStack {
+                    SettingsView()
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Done") { showSettings = false }
+                            }
+                        }
+                }
+            }
             .overlay(alignment: .bottomTrailing) {
                 quickActionButton
             }

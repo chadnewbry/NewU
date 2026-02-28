@@ -5,9 +5,20 @@ import SwiftData
 struct NewUApp: App {
     let dataManager = DataManager.shared
 
+    @AppStorage("appColorScheme") private var appColorSchemeRaw: String = "system"
+
+    private var preferredColorScheme: ColorScheme? {
+        switch appColorSchemeRaw {
+        case "light": return .light
+        case "dark":  return .dark
+        default:      return nil
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(preferredColorScheme)
                 .onAppear {
                     dataManager.seedDefaultMedications()
                     _ = dataManager.getOrCreateUserProfile()
