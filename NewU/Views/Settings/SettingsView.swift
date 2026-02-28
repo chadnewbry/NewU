@@ -423,16 +423,16 @@ struct SettingsView: View {
 
     private var aboutSection: some View {
         Section("About") {
-            Link(destination: URL(string: "https://newu-app.com/privacy")!) {
+            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/privacy.html")!) {
                 Label("Privacy Policy", systemImage: "hand.raised.fill")
             }
 
-            Link(destination: URL(string: "https://newu-app.com/terms")!) {
+            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/terms.html")!) {
                 Label("Terms of Use", systemImage: "doc.text.fill")
             }
 
-            Link(destination: URL(string: "mailto:chad.newbry@gmail.com")!) {
-                Label("Customer Support", systemImage: "envelope.fill")
+            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/support.html")!) {
+                Label("Support", systemImage: "questionmark.circle.fill")
             }
 
             Button {
