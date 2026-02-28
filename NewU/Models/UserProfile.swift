@@ -24,6 +24,7 @@ final class UserProfile {
     var hasCompletedOnboarding: Bool
     var hasPurchasedFullAccess: Bool
     var freeUsesRemaining: Int
+    var healthKitEnabled: Bool
 
     init(
         id: UUID = UUID(),
@@ -46,7 +47,8 @@ final class UserProfile {
         notificationsEnabled: Bool = false,
         hasCompletedOnboarding: Bool = false,
         hasPurchasedFullAccess: Bool = false,
-        freeUsesRemaining: Int = 5
+        freeUsesRemaining: Int = 5,
+        healthKitEnabled: Bool = false
     ) {
         self.id = id
         self.heightInches = heightInches
@@ -69,5 +71,6 @@ final class UserProfile {
         self.hasCompletedOnboarding = hasCompletedOnboarding
         self.hasPurchasedFullAccess = hasPurchasedFullAccess
         self.freeUsesRemaining = freeUsesRemaining
+        self.healthKitEnabled = healthKitEnabled
     }
 }
