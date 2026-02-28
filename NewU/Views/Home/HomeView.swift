@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var showLogSideEffect = false
     @State private var showQuickActions = false
     @State private var showSettings = false
+    @State private var showPaywall = false
 
     private var profile: UserProfile? { profiles.first }
     private let calculator = MedicationLevelCalculator()
@@ -66,6 +67,12 @@ struct HomeView: View {
         .sheet(isPresented: $showLogSideEffect) {
             LogSideEffectView()
         }
+        .sheet(isPresented: $showLogInjection) {
+            AddInjectionView()
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
+        }
     }
 
     // MARK: - Header
@@ -73,24 +80,29 @@ struct HomeView: View {
     @ViewBuilder
     private var headerSection: some View {
         if let profile, !profile.hasPurchasedFullAccess {
+            let badgeColor: Color = profile.freeUsesRemaining <= 2 ? .orange : .blue
+            let badgeText = profile.freeUsesRemaining == 0
+                ? "Upgrade to continue logging"
+                : "\(profile.freeUsesRemaining) free injections remaining"
+
             HStack(spacing: 12) {
-                Text("\(profile.freeUsesRemaining) free injections remaining")
+                Text(badgeText)
                     .font(.caption)
                     .fontWeight(.medium)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(.blue.opacity(0.15), in: Capsule())
-                    .foregroundStyle(.blue)
+                    .background(badgeColor.opacity(0.15), in: Capsule())
+                    .foregroundStyle(badgeColor)
 
                 Button {
-                    // TODO: trigger paywall
+                    showPaywall = true
                 } label: {
                     Text("Upgrade")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 6)
-                        .background(.blue, in: Capsule())
+                        .background(badgeColor, in: Capsule())
                         .foregroundStyle(.white)
                 }
 
@@ -113,7 +125,11 @@ struct HomeView: View {
 
             if isToday && !alreadyLoggedToday {
                 Button {
-                    showLogInjection = true
+                    if profile.freeUsesRemaining == 0 && !profile.hasPurchasedFullAccess {
+                        showPaywall = true
+                    } else {
+                        showLogInjection = true
+                    }
                 } label: {
                     VStack(spacing: 8) {
                         Text("It's Shot Day! 💉")
@@ -392,7 +408,11 @@ struct HomeView: View {
                 VStack(spacing: 8) {
                     QuickActionButton(icon: "syringe.fill", label: "Injection", color: .blue) {
                         showQuickActions = false
-                        showLogInjection = true
+                        if let profile, profile.freeUsesRemaining == 0 && !profile.hasPurchasedFullAccess {
+                            showPaywall = true
+                        } else {
+                            showLogInjection = true
+                        }
                     }
                     QuickActionButton(icon: "scalemass.fill", label: "Weight", color: .indigo) {
                         showQuickActions = false
