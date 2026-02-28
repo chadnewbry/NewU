@@ -7,53 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10001 /* NewUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
-		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
-		A10003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10003; };
-		A10004 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10004; };
-		A10005 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
-		A10007 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
-		A10008 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
-		A10009 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
-		A10010 /* ProgressView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
-		A10011 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
-		A10012 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
-		A10013 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
-		A10014 /* NutritionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014; };
-		A10015 /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015; };
-		A10016 /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
-		A10017 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
-		A10018 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
-		A10019 /* MedicationLevelCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019; };
-		A10020 /* ReconstitutionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
-		A10021 /* MedicationLevelCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021; };
-		A10022 /* ReconstitutionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
-		A10023 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023; };
-		A10024 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024; };
-		A10025 /* SideEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025; };
-		A10026 /* LogSideEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026; };
-		A10027 /* SideEffectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027; };
-		A10028 /* SideEffectPatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028; };
-		A10029 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10029; };
-		A10030 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030; };
-		A10031 /* WelcomeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031; };
-		A10032 /* MedicationSelectionStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032; };
-		A10033 /* DosageStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033; };
-		A10034 /* ScheduleStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10034; };
-		A10035 /* BodyStatsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035; };
-		A10036 /* SuccessPlanStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036; };
-		A10037 /* HealthIntegrationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10037; };
-		A10038 /* NotificationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10038; };
-		A10041 /* BodyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041; };
-		A10042 /* PrepChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042; };
-		A10044 /* InjectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044; };
-		A10045 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045; };
-		A10046 /* PeptidePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046; };
-		A10047 /* SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047; };
-		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048; };
+		8785C66BB6A4C0517425FE41 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07D991DF972E3AACDCD2F58 /* HealthKit.framework */; };
+		9BD2ECEF21EDF059D6324959 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */; };
+		9CFF419AA310888C952A5A77 /* WorkoutSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684B959CF51F700DAF49058 /* WorkoutSummary.swift */; };
+		A10001 /* NewUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* NewUApp.swift */; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* ContentView.swift */; };
+		A10003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10003 /* Assets.xcassets */; };
+		A10004 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10004 /* Preview Assets.xcassets */; };
+		A10005 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* Injection.swift */; };
+		A10007 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* HomeView.swift */; };
+		A10008 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* TrackView.swift */; };
+		A10009 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* CalculatorView.swift */; };
+		A10010 /* ProgressView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* ProgressView_.swift */; };
+		A10011 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* CalendarView.swift */; };
+		A10012 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* Medication.swift */; };
+		A10013 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* WeightEntry.swift */; };
+		A10014 /* NutritionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014 /* NutritionEntry.swift */; };
+		A10015 /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015 /* SideEffect.swift */; };
+		A10016 /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* DailyNote.swift */; };
+		A10017 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* UserProfile.swift */; };
+		A10018 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* DataManager.swift */; };
+		A10019 /* MedicationLevelCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* MedicationLevelCalculator.swift */; };
+		A10020 /* ReconstitutionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020 /* ReconstitutionCalculator.swift */; };
+		A10021 /* MedicationLevelCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* MedicationLevelCalculatorTests.swift */; };
+		A10022 /* ReconstitutionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* ReconstitutionCalculatorTests.swift */; };
+		A10023 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023 /* NotificationManager.swift */; };
+		A10024 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024 /* NotificationSettingsView.swift */; };
+		A10025 /* SideEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* SideEffectsView.swift */; };
+		A10026 /* LogSideEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* LogSideEffectView.swift */; };
+		A10027 /* SideEffectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027 /* SideEffectHistoryView.swift */; };
+		A10028 /* SideEffectPatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028 /* SideEffectPatternsView.swift */; };
+		A10029 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10029 /* DayDetailView.swift */; };
+		A10030 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030 /* OnboardingContainerView.swift */; };
+		A10031 /* WelcomeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031 /* WelcomeStepView.swift */; };
+		A10032 /* MedicationSelectionStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032 /* MedicationSelectionStepView.swift */; };
+		A10033 /* DosageStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033 /* DosageStepView.swift */; };
+		A10034 /* ScheduleStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10034 /* ScheduleStepView.swift */; };
+		A10035 /* BodyStatsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* BodyStatsStepView.swift */; };
+		A10036 /* SuccessPlanStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036 /* SuccessPlanStepView.swift */; };
+		A10037 /* HealthIntegrationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10037 /* HealthIntegrationStepView.swift */; };
+		A10038 /* NotificationStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10038 /* NotificationStepView.swift */; };
+		A10041 /* BodyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* BodyMapView.swift */; };
+		A10042 /* PrepChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* PrepChecklistView.swift */; };
+		A10044 /* InjectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044 /* InjectionHistoryView.swift */; };
+		A10045 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045 /* PaywallView.swift */; };
+		A10046 /* PeptidePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* PeptidePreset.swift */; };
+		A10047 /* SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* SyringeView.swift */; };
+		A10048 /* MedicationLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* MedicationLevelView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		H10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F10004 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F10001;
+			remoteInfo = NewU;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		4684B959CF51F700DAF49058 /* WorkoutSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WorkoutSummary.swift; sourceTree = "<group>"; };
+		AFFCBA8DE67F525454454A20 /* NewU.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = NewU.entitlements; sourceTree = "<group>"; };
+		B07D991DF972E3AACDCD2F58 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		B10001 /* NewUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUApp.swift; sourceTree = "<group>"; };
 		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B10003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,7 +78,7 @@
 		B10007 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B10008 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		B10009 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
-		B10010 /* ProgressView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView_.swift"; sourceTree = "<group>"; };
+		B10010 /* ProgressView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView_.swift; sourceTree = "<group>"; };
 		B10011 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		B10012 /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		B10013 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
@@ -75,8 +91,6 @@
 		B10020 /* ReconstitutionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstitutionCalculator.swift; sourceTree = "<group>"; };
 		B10021 /* MedicationLevelCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelCalculatorTests.swift; sourceTree = "<group>"; };
 		B10022 /* ReconstitutionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstitutionCalculatorTests.swift; sourceTree = "<group>"; };
-		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10023 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B10024 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		B10025 /* SideEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsView.swift; sourceTree = "<group>"; };
@@ -100,23 +114,18 @@
 		B10046 /* PeptidePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeptidePreset.swift; sourceTree = "<group>"; };
 		B10047 /* SyringeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyringeView.swift; sourceTree = "<group>"; };
 		B10048 /* MedicationLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationLevelView.swift; sourceTree = "<group>"; };
+		C10001 /* NewU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10002 /* NewUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF290B4992885FCBACB2EB8C /* WeightEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
+		E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXContainerItemProxy section */
-		H10001 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F10004 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F10001;
-			remoteInfo = NewU;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D10001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8785C66BB6A4C0517425FE41 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,22 +139,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1833707FE9A424AFE3E8F7C5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B07D991DF972E3AACDCD2F58 /* HealthKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		685D7437CB1509F7362E445B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1833707FE9A424AFE3E8F7C5 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E10001 = {
 			isa = PBXGroup;
 			children = (
 				E10002 /* NewU */,
 				E10017 /* NewUTests */,
 				E10010 /* Products */,
+				685D7437CB1509F7362E445B /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		E10017 /* NewUTests */ = {
-			isa = PBXGroup;
-			children = (
-				B10021 /* MedicationLevelCalculatorTests.swift */,
-				B10022 /* ReconstitutionCalculatorTests.swift */,
-			);
-			path = NewUTests;
 			sourceTree = "<group>";
 		};
 		E10002 /* NewU */ = {
@@ -161,6 +178,7 @@
 				E10013 /* Resources */,
 				B10003 /* Assets.xcassets */,
 				E10009 /* Preview Content */,
+				AFFCBA8DE67F525454454A20 /* NewU.entitlements */,
 			);
 			path = NewU;
 			sourceTree = "<group>";
@@ -176,6 +194,8 @@
 				B10016 /* DailyNote.swift */,
 				B10017 /* UserProfile.swift */,
 				B10046 /* PeptidePreset.swift */,
+				CF290B4992885FCBACB2EB8C /* WeightEntry.swift */,
+				4684B959CF51F700DAF49058 /* WorkoutSummary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -254,6 +274,7 @@
 				B10019 /* MedicationLevelCalculator.swift */,
 				B10020 /* ReconstitutionCalculator.swift */,
 				B10023 /* NotificationManager.swift */,
+				E7EA542FB3FBFE03B2D92A2F /* HealthKitManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -289,6 +310,15 @@
 				B10029 /* DayDetailView.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		E10017 /* NewUTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10021 /* MedicationLevelCalculatorTests.swift */,
+				B10022 /* ReconstitutionCalculatorTests.swift */,
+			);
+			path = NewUTests;
 			sourceTree = "<group>";
 		};
 		E10018 /* Settings */ = {
@@ -331,7 +361,7 @@
 /* Begin PBXNativeTarget section */
 		F10001 /* NewU */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = G10003;
+			buildConfigurationList = G10003 /* Build configuration list for PBXNativeTarget "NewU" */;
 			buildPhases = (
 				F10002 /* Sources */,
 				D10001 /* Frameworks */,
@@ -348,7 +378,7 @@
 		};
 		F10006 /* NewUTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = G10007;
+			buildConfigurationList = G10007 /* Build configuration list for PBXNativeTarget "NewUTests" */;
 			buildPhases = (
 				F10005 /* Sources */,
 				D10002 /* Frameworks */,
@@ -364,14 +394,6 @@
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
-
-/* Begin PBXTargetDependency section */
-		H10002 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F10001 /* NewU */;
-			targetProxy = H10001 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		F10004 /* Project object */ = {
@@ -390,7 +412,7 @@
 					};
 				};
 			};
-			buildConfigurationList = G10001;
+			buildConfigurationList = G10001 /* Build configuration list for PBXProject "NewU" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -466,6 +488,8 @@
 				A10046 /* PeptidePreset.swift in Sources */,
 				A10047 /* SyringeView.swift in Sources */,
 				A10048 /* MedicationLevelView.swift in Sources */,
+				9CFF419AA310888C952A5A77 /* WorkoutSummary.swift in Sources */,
+				9BD2ECEF21EDF059D6324959 /* HealthKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +503,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		H10002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10001 /* NewU */;
+			targetProxy = H10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		G10002 /* Debug */ = {
@@ -605,6 +637,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NewU/NewU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NewU/Preview Content\"";
@@ -636,6 +669,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NewU/NewU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NewU/Preview Content\"";
