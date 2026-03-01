@@ -396,15 +396,15 @@ struct SettingsView: View {
 
     private var aboutSection: some View {
         Section("About") {
-            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/privacy.html")!) {
+            Link(destination: AppURLs.privacyPolicy) {
                 Label("Privacy Policy", systemImage: "hand.raised.fill")
             }
 
-            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/terms.html")!) {
+            Link(destination: AppURLs.termsOfService) {
                 Label("Terms of Use", systemImage: "doc.text.fill")
             }
 
-            Link(destination: URL(string: "https://chadnewbry.github.io/NewU/support.html")!) {
+            Link(destination: AppURLs.support) {
                 Label("Support", systemImage: "questionmark.circle.fill")
             }
 
@@ -415,7 +415,7 @@ struct SettingsView: View {
             }
 
             ShareLink(
-                item: URL(string: "https://apps.apple.com/app/id0000000000")!,
+                item: AppURLs.appStore,
                 subject: Text("Check out NewU"),
                 message: Text("I've been using NewU to track my GLP-1 journey — it's great!")
             ) {
