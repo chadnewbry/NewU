@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-import StoreKit
+import RevenueCatUI
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -20,8 +20,7 @@ struct SettingsView: View {
     @State private var healthKitStatusMessage = ""
     @State private var isRequestingHealthKit = false
     @State private var showPaywall = false
-    @State private var isRestoring = false
-    @State private var restoreMessage: String?
+    @State private var showCustomerCenter = false
 
     // Profile edit state
     @State private var heightFeet: Int = 5
@@ -78,6 +77,9 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showPaywall) {
             PaywallView()
+        }
+        .sheet(isPresented: $showCustomerCenter) {
+            CustomerCenterView()
         }
     }
 
@@ -382,40 +384,11 @@ struct SettingsView: View {
             }
 
             Button {
-                restorePurchase()
+                showCustomerCenter = true
             } label: {
-                HStack(spacing: 8) {
-                    Text("Restore Purchase")
-                    if isRestoring {
-                        ProgressView()
-                            .scaleEffect(0.75)
-                    }
-                }
+                Text("Manage Purchase")
             }
             .foregroundStyle(.blue)
-            .disabled(isRestoring)
-
-            if let restoreMessage {
-                Text(restoreMessage)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    private func restorePurchase() {
-        isRestoring = true
-        restoreMessage = nil
-        Task {
-            do {
-                let restored = try await purchaseManager.restorePurchases()
-                restoreMessage = restored
-                    ? "Purchase restored successfully."
-                    : "No previous purchase found."
-            } catch {
-                restoreMessage = error.localizedDescription
-            }
-            isRestoring = false
         }
     }
 

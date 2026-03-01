@@ -1,5 +1,5 @@
 import Foundation
-import StoreKit
+import RevenueCat
 import SwiftData
 
 @MainActor
@@ -7,85 +7,66 @@ final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
 
     @Published var isPurchased: Bool = false
+    @Published var currentOffering: Offering?
 
-    private let productID = "com.newu.glpcalculator.fullaccess"
-    private var updatesTask: Task<Void, Never>?
+    private let entitlementID = "GLP 1 Tracker Pro"
 
-    private init() {
-        updatesTask = Task {
-            for await result in Transaction.updates {
-                await self.handle(transactionResult: result)
-            }
-        }
+    private init() {}
+
+    // MARK: - Configure (call once at launch)
+
+    func configure(apiKey: String) {
+        Purchases.logLevel = .error
+        Purchases.configure(withAPIKey: apiKey)
+        Purchases.shared.delegate = self
+
         Task {
-            _ = await checkPurchaseStatus()
+            await checkPurchaseStatus()
+            await fetchOffering()
         }
-    }
-
-    deinit {
-        updatesTask?.cancel()
     }
 
     // MARK: - Public API
 
     @discardableResult
     func checkPurchaseStatus() async -> Bool {
-        var purchased = false
-        for await result in Transaction.currentEntitlements {
-            if case .verified(let transaction) = result,
-               transaction.productID == productID,
-               transaction.revocationDate == nil {
-                purchased = true
-                break
-            }
-        }
+        guard let customerInfo = try? await Purchases.shared.customerInfo() else { return false }
+        let purchased = customerInfo.entitlements[entitlementID]?.isActive == true
         isPurchased = purchased
-        if purchased {
-            updateUserProfile(purchased: true)
-        }
+        if purchased { updateUserProfile(purchased: true) }
         return purchased
     }
 
-    func purchase() async throws -> Bool {
-        let products = try await Product.products(for: [productID])
-        guard let product = products.first else {
-            throw PurchaseError.productNotFound
-        }
+    func fetchOffering() async {
+        guard let offerings = try? await Purchases.shared.offerings() else { return }
+        currentOffering = offerings.current
+    }
 
-        let result = try await product.purchase()
-        switch result {
-        case .success(let verificationResult):
-            if case .verified(let transaction) = verificationResult {
-                await transaction.finish()
-                isPurchased = true
-                updateUserProfile(purchased: true)
-                return true
-            }
-            return false
-        case .userCancelled:
-            return false
-        case .pending:
-            return false
-        @unknown default:
-            return false
-        }
+    func purchase(package: Package) async throws -> Bool {
+        let result = try await Purchases.shared.purchase(package: package)
+        let purchased = result.customerInfo.entitlements[entitlementID]?.isActive == true
+        isPurchased = purchased
+        if purchased { updateUserProfile(purchased: true) }
+        return purchased
     }
 
     func restorePurchases() async throws -> Bool {
-        try await AppStore.sync()
-        return await checkPurchaseStatus()
+        let customerInfo = try await Purchases.shared.restorePurchases()
+        let purchased = customerInfo.entitlements[entitlementID]?.isActive == true
+        isPurchased = purchased
+        if purchased { updateUserProfile(purchased: true) }
+        return purchased
+    }
+
+    // MARK: - Called by PaywallView callbacks
+
+    func handleCustomerInfo(_ customerInfo: CustomerInfo) {
+        let purchased = customerInfo.entitlements[entitlementID]?.isActive == true
+        isPurchased = purchased
+        if purchased { updateUserProfile(purchased: true) }
     }
 
     // MARK: - Private
-
-    private func handle(transactionResult: VerificationResult<Transaction>) async {
-        guard case .verified(let transaction) = transactionResult,
-              transaction.productID == productID,
-              transaction.revocationDate == nil else { return }
-        await transaction.finish()
-        isPurchased = true
-        updateUserProfile(purchased: true)
-    }
 
     private func updateUserProfile(purchased: Bool) {
         let dataManager = DataManager.shared
@@ -95,13 +76,14 @@ final class PurchaseManager: ObservableObject {
     }
 }
 
-enum PurchaseError: LocalizedError {
-    case productNotFound
+// MARK: - PurchasesDelegate (handles background transaction updates)
 
-    var errorDescription: String? {
-        switch self {
-        case .productNotFound:
-            return "Product not found in the App Store."
+extension PurchaseManager: PurchasesDelegate {
+    nonisolated func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
+        Task { @MainActor in
+            let purchased = customerInfo.entitlements[self.entitlementID]?.isActive == true
+            self.isPurchased = purchased
+            if purchased { self.updateUserProfile(purchased: true) }
         }
     }
 }

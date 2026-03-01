@@ -40,7 +40,7 @@ struct HomeView: View {
                         showSettings = true
                     } label: {
                         Image(systemName: "gearshape.fill")
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color(.label))
                     }
                 }
             }
